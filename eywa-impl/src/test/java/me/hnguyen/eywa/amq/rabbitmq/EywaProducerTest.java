@@ -9,9 +9,11 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  *
  * @author hnguyen
  */
+//@Ignore
 public class EywaProducerTest {
 
     @Test
+//    @Ignore
     public void testSenderTemplateCreatesExchange() {
         ApplicationContext ctx
                 = new AnnotationConfigApplicationContext(RabbitConfig.class);
@@ -20,4 +22,5 @@ public class EywaProducerTest {
 
         senderTemplate.send("Test");
     }
+    
 }

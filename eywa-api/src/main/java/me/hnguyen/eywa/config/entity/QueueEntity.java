@@ -1,6 +1,5 @@
 package me.hnguyen.eywa.config.entity;
 
-import me.hnguyen.eywa.BaseEntity;
 import me.hnguyen.eywa.config.bean.QueueBean;
 import me.hnguyen.eywa.config.dto.QueueDto;
 

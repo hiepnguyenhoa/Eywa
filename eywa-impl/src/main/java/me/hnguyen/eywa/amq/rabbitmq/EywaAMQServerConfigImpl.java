@@ -1,5 +1,6 @@
 package me.hnguyen.eywa.amq.rabbitmq;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,6 +64,11 @@ public class EywaAMQServerConfigImpl implements EywaAMQServerConfig {
     public Exchange getExchange(String key) {
         Validate.notNull(key);
         return this.senderExchangeDtos.get(key);
+    }
+    
+    @Override
+    public List<Exchange> getExchanges(){
+        return new ArrayList(this.senderExchangeDtos.values());
     }
 
     private void initConnectionFactories() {

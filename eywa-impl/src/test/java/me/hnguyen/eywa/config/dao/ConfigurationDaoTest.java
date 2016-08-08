@@ -14,12 +14,14 @@ import me.hnguyen.eywa.config.entity.QueueEntity;
 import me.hnguyen.eywa.config.entity.QueueEntityImpl;
 import me.hnguyen.eywa.config.entity.SenderChannelEntity;
 import me.hnguyen.eywa.config.entity.SenderChannelEntityImpl;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  *
  * @author hnguyen
  */
+@Ignore
 public class ConfigurationDaoTest extends DaoContext {
     
     private static final String KEY = "localhost";
@@ -28,41 +30,56 @@ public class ConfigurationDaoTest extends DaoContext {
     private static final String AMQ_USERNAME = "guest";
     private static final String AMQ_PASSWORD = "guest";
     
-    private static final String EXCHANGE_NAME = "localhost_fanout";
-    private static final String EXCHANGE_TYPE = "fanout";
+    private static final String EXCHANGE_NAME_1 = "localhost.fanout";
+    private static final String EXCHANGE_TYPE_1 = "fanout";
+    private static final String EXCHANGE_NAME_2 = "localhost.direct";
+    private static final String EXCHANGE_TYPE_2 = "direct";
     
-    private static final String QUEUE_NAME = "queue.fanout";
+    private static final String QUEUE_NAME_1 = "queue.fanout.1";
+    private static final String QUEUE_NAME_2 = "queue.fanout.2";
+    private static final String QUEUE_NAME_3 = "queue.fanout.3";
     
     @Inject
     private ConfigurationDao configDao;
     
-//    @Test
-//    public void addExchangeTest(){
-//        HostEntity hostEntity = new HostEntityImpl();
-//        hostEntity.setKey(KEY);
-//        hostEntity.setName(AMQ_HOST);
-//        hostEntity.setUsername(AMQ_USERNAME);
-//        hostEntity.setPassword(AMQ_PASSWORD);
-//        configDao.save(hostEntity);
-//        
-//        ExchangeEntity exchangeEntity = new ExchangeEntityImpl();
-//        exchangeEntity.setKey(KEY);
-//        exchangeEntity.setName(EXCHANGE_NAME);
-//        exchangeEntity.setType(EXCHANGE_TYPE);
-//        
+    @Test
+    public void addExchangeTest(){
+        HostEntity hostEntity = new HostEntityImpl();
+        hostEntity.setKey(KEY);
+        hostEntity.setName(AMQ_HOST);
+        hostEntity.setUsername(AMQ_USERNAME);
+        hostEntity.setPassword(AMQ_PASSWORD);
+        configDao.save(hostEntity);
+        
+        ExchangeEntity fanoutExchangeEntity = new ExchangeEntityImpl();
+        fanoutExchangeEntity.setKey(KEY);
+        fanoutExchangeEntity.setName(EXCHANGE_NAME_1);
+        fanoutExchangeEntity.setType(EXCHANGE_TYPE_1);
+        
+        ExchangeEntity directtExchangeEntity = new ExchangeEntityImpl();
+        directtExchangeEntity.setKey(KEY);
+        directtExchangeEntity.setName(EXCHANGE_NAME_2);
+        directtExchangeEntity.setType(EXCHANGE_TYPE_2);
+        
 //        QueueEntity queueEntity = new QueueEntityImpl();
 //        queueEntity.setKey(KEY);
-//        queueEntity.setName(QUEUE_NAME);
+//        queueEntity.setName(QUEUE_NAME_1);
 //        
 //        BindingEntity bindingEntity = new BindingEntityImpl();
 //        bindingEntity.setKey(KEY);
-//        bindingEntity.setExchange(exchangeEntity);
+//        bindingEntity.setExchange(fanoutExchangeEntity);
 //        bindingEntity.setQueue(queueEntity);
 //        configDao.save(bindingEntity);
-//        
-//        SenderChannelEntity senderChannelEntity = new SenderChannelEntityImpl();
-//        senderChannelEntity.setExchange(exchangeEntity);
-//        senderChannelEntity.setKey(KEY);
-//        configDao.save(senderChannelEntity);
-//    }
+        
+        SenderChannelEntity senderChannelEntity = new SenderChannelEntityImpl();
+        senderChannelEntity.setExchange(fanoutExchangeEntity);
+        senderChannelEntity.setKey(KEY);
+        configDao.save(senderChannelEntity);
+        
+        senderChannelEntity = new SenderChannelEntityImpl();
+        senderChannelEntity.setExchange(directtExchangeEntity);
+        senderChannelEntity.setKey(KEY);
+        configDao.save(senderChannelEntity);
+    }
+  
 }

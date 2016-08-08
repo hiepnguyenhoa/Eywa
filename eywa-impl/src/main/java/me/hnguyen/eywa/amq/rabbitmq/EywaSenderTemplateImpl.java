@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 public class EywaSenderTemplateImpl implements EywaSenderTemplate {
 
     private static final String TMP_HOST_KEY = "localhost";
-    private static final String TMP_EXCHANGE_KEY = "localhost_localhost_fanout";
+    private static final String TMP_EXCHANGE_KEY = "localhost_localhost.fanout";
 
     @Inject
     private EywaAMQServerConfig serverConfig;

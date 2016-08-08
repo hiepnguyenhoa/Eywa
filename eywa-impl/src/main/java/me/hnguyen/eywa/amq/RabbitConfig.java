@@ -1,8 +1,10 @@
 package me.hnguyen.eywa.amq;
 
+import java.util.List;
 import javax.inject.Inject;
 import me.hnguyen.eywa.amq.rabbitmq.EywaAMQServerConfig;
 import org.springframework.amqp.core.AmqpAdmin;
+import org.springframework.amqp.core.Exchange;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Bean;
@@ -30,6 +32,11 @@ public class RabbitConfig {
     public AmqpAdmin amqpAdmin() {
         RabbitAdmin rabbitAdmin = (RabbitAdmin) eywaAMQServerConfig.getAmqpAdmin("localhost");
         return rabbitAdmin;
+    }
+    
+    @Bean
+    public List<Exchange> exchange(){
+        return eywaAMQServerConfig.getExchanges();
     }
     
     @Bean
