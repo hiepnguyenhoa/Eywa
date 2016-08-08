@@ -6,15 +6,15 @@ package me.hnguyen.eywa;
  */
 public abstract class BaseBeanAbst implements BaseBean{
     
-    protected long id;
+    protected Long id;
 
     @Override
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
     @Override
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
     

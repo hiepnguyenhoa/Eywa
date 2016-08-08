@@ -2,12 +2,14 @@ package me.hnguyen.eywa.config.bean;
 
 import java.util.Objects;
 import me.hnguyen.eywa.util.LambdaUtils;
+import org.neo4j.ogm.annotation.NodeEntity;
 import org.springframework.beans.factory.annotation.Value;
 
 /**
  *
  * @author hnguyen
  */
+@NodeEntity(label = "Queue")
 public class QueueBeanImpl extends ConfigBeanAbst implements QueueBean {
 
     @Value("${queue.name}")

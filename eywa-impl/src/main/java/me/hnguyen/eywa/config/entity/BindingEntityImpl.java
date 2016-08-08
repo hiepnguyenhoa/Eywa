@@ -3,12 +3,15 @@ package me.hnguyen.eywa.config.entity;
 import me.hnguyen.eywa.config.bean.BindingBeanImpl;
 import me.hnguyen.eywa.config.dto.BindingDto;
 import me.hnguyen.eywa.config.dto.BindingDtoImpl;
-import org.springframework.beans.BeanUtils;
+import me.hnguyen.eywa.util.EywaBeanUtils;
+import org.neo4j.ogm.annotation.NodeEntity;
 
 /**
  *
  * @author hnguyen
  */
+
+@NodeEntity(label = "Binding")
 public class BindingEntityImpl
         extends BindingBeanImpl<ExchangeEntity, QueueEntity>
         implements BindingEntity<ExchangeEntity, QueueEntity> {
@@ -16,7 +19,7 @@ public class BindingEntityImpl
     @Override
     public BindingDto toDto() {
         BindingDto bindingDto = new BindingDtoImpl();
-        BeanUtils.copyProperties(this, bindingDto);
+        EywaBeanUtils.copyProperties(this, bindingDto);
         return bindingDto;
     }
 

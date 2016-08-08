@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import me.hnguyen.eywa.util.LambdaUtils;
+import org.neo4j.ogm.annotation.NodeEntity;
 
 /**
  *
  * @author hnguyen
  * @param <B>
  */
+@NodeEntity(label = "ReceiverChannel")
 public class ReceiverChannelBeanImpl<B extends BindingBean> extends ConfigBeanAbst implements ReceiverChannelBean<B> {
 
     /**

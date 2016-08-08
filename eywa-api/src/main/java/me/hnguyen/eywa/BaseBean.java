@@ -8,7 +8,7 @@ public interface BaseBean {
     
     public static final String ID = "id";
     
-    public long getId();
-    public void setId(long id);
+    public Long getId();
+    public void setId(Long id);
     
 }

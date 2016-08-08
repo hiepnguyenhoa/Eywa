@@ -2,12 +2,14 @@ package me.hnguyen.eywa.config.bean;
 
 import java.util.Objects;
 import me.hnguyen.eywa.util.LambdaUtils;
+import org.neo4j.ogm.annotation.NodeEntity;
 
 /**
  *
  * @author hnguyen
  * @param <E>
  */
+@NodeEntity(label = "SenderChannel")
 public class SenderChannelBeanImpl< E extends ExchangeBean>
         extends ConfigBeanAbst
         implements SenderChannelBean<E> {

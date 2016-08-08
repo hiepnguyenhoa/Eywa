@@ -1,54 +1,36 @@
 package me.hnguyen.eywa.config.service;
 
+import java.util.List;
 import javax.inject.Inject;
 import me.hnguyen.eywa.config.dao.ConfigurationDao;
 import me.hnguyen.eywa.config.dto.HostDto;
-import me.hnguyen.eywa.config.entity.ExchangeEntity;
 import me.hnguyen.eywa.config.entity.HostEntity;
-import org.springframework.stereotype.Service;
 import me.hnguyen.eywa.config.entity.SenderChannelEntity;
 import me.hnguyen.eywa.config.dto.SenderChannelDto;
+import me.hnguyen.eywa.util.EywaBeanUtils;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author hnguyen
  */
-@Service
+@Component
 public class ConfigurationServiceImpl implements ConfigurationService {
 
-//    @Inject
+    @Inject
     private ConfigurationDao configDAO;
 
-    @Inject
-    private HostEntity defHost;
-
-    @Inject
-    private SenderChannelEntity defChannel;
-    
-    @Inject
-    private ExchangeEntity exchangeEntity;
-    
-
     @Override
-    public HostDto getHostConfig() {
-        HostEntity hostEntity = null;
-//        hostEntity = configDAO.findHostConfig();
-        if (hostEntity == null) {
-            hostEntity = defHost;
-        }
-        return hostEntity.toDto();
+    public List<HostDto> getHostConfig() {
+        List<HostEntity> hostEntities = configDAO.findHostConfigs();
+        return EywaBeanUtils.toDto(hostEntities);
     }
 
-    //TODO: don't know why it return BaseDto
     @Override
-    public SenderChannelDto getProducerChannel() {
-        SenderChannelEntity producerChannelEntity = null;
-//        producerChannelEntity = configDAO.findProducerChannel();
-        if (producerChannelEntity == null) {
-            defChannel.setExchange(exchangeEntity);
-            producerChannelEntity = defChannel;
-        }
-        return (SenderChannelDto) producerChannelEntity.toDto();
+    public List<SenderChannelDto> getProducerChannels() {
+        List<SenderChannelEntity> senderChannelEntities = configDAO.findProducerChannels();
+        List<SenderChannelDto> senderChannelDto =  EywaBeanUtils.toDto(senderChannelEntities);
+        return senderChannelDto;
     }
 
 }
