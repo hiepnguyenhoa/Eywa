@@ -1,10 +1,8 @@
 package me.hnguyen.eywa.config.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 import me.hnguyen.eywa.config.bean.ReceiverChannelBeanImpl;
 import me.hnguyen.eywa.config.dto.BindingDto;
-import me.hnguyen.eywa.config.dto.BindingDtoImpl;
 import me.hnguyen.eywa.config.dto.ReceiverChannelDtoImpl;
 import me.hnguyen.eywa.config.dto.ReceiverChannelDto;
 import me.hnguyen.eywa.util.EywaBeanUtils;

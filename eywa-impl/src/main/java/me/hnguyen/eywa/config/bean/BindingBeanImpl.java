@@ -19,7 +19,7 @@ public class BindingBeanImpl< E extends ExchangeBean, Q extends QueueBean>
 
     private Q queue;
 
-    private String rule;
+    private String routingKey;
 
     @Override
     public E getExchange() {
@@ -42,13 +42,13 @@ public class BindingBeanImpl< E extends ExchangeBean, Q extends QueueBean>
     }
 
     @Override
-    public String getRule() {
-        return rule;
+    public String getRoutingKey() {
+        return routingKey;
     }
 
     @Override
-    public void setRule(String rule) {
-        this.rule = rule;
+    public void setRoutingKey(String routingKey) {
+        this.routingKey = routingKey;
     }
 
     @Override
@@ -62,7 +62,7 @@ public class BindingBeanImpl< E extends ExchangeBean, Q extends QueueBean>
         BindingBeanImpl binding = (BindingBeanImpl) obj;
         return LambdaUtils.compare_object.apply(this.exchange, binding.exchange)
                 || LambdaUtils.compare_object.apply(this.queue, binding.queue)
-                || LambdaUtils.compare_object.apply(this.rule, binding.rule);
+                || LambdaUtils.compare_object.apply(this.routingKey, binding.routingKey);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class BindingBeanImpl< E extends ExchangeBean, Q extends QueueBean>
         int hash = 5;
         hash = 37 * hash + Objects.hashCode(this.exchange);
         hash = 37 * hash + Objects.hashCode(this.queue);
-        hash = 37 * hash + Objects.hashCode(this.rule);
+        hash = 37 * hash + Objects.hashCode(this.routingKey);
         return hash;
     }
 

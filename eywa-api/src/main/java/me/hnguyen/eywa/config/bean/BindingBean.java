@@ -16,6 +16,6 @@ public interface BindingBean<E extends ExchangeBean, Q extends QueueBean> extend
     public void setQueue(Q queue);
     public Q getQueue();
     
-    public String getRule();
-    public void setRule(String rule);
+    public String getRoutingKey();
+    public void setRoutingKey(String rule);
 }

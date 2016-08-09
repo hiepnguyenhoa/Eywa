@@ -2,8 +2,6 @@ package me.hnguyen.eywa.config.dao;
 
 import javax.inject.Inject;
 import me.hnguyen.eywa.DaoContext;
-import me.hnguyen.eywa.config.bean.ExchangeBean;
-import me.hnguyen.eywa.config.bean.ExchangeBeanImpl;
 import me.hnguyen.eywa.config.entity.BindingEntity;
 import me.hnguyen.eywa.config.entity.BindingEntityImpl;
 import me.hnguyen.eywa.config.entity.ExchangeEntity;
@@ -14,6 +12,7 @@ import me.hnguyen.eywa.config.entity.QueueEntity;
 import me.hnguyen.eywa.config.entity.QueueEntityImpl;
 import me.hnguyen.eywa.config.entity.SenderChannelEntity;
 import me.hnguyen.eywa.config.entity.SenderChannelEntityImpl;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -25,7 +24,7 @@ import org.junit.Test;
 public class ConfigurationDaoTest extends DaoContext {
     
     private static final String KEY = "localhost";
-    
+    private static final String ROUTING_KEY = "localhost.all";
     private static final String AMQ_HOST = "localhost";
     private static final String AMQ_USERNAME = "guest";
     private static final String AMQ_PASSWORD = "guest";
@@ -35,9 +34,9 @@ public class ConfigurationDaoTest extends DaoContext {
     private static final String EXCHANGE_NAME_2 = "localhost.direct";
     private static final String EXCHANGE_TYPE_2 = "direct";
     
-    private static final String QUEUE_NAME_1 = "queue.fanout.1";
-    private static final String QUEUE_NAME_2 = "queue.fanout.2";
-    private static final String QUEUE_NAME_3 = "queue.fanout.3";
+    private static final String QUEUE_NAME_1 = "queue.1";
+    private static final String QUEUE_NAME_2 = "queue.2";
+    private static final String QUEUE_NAME_3 = "queue.3";
     
     @Inject
     private ConfigurationDao configDao;
@@ -61,16 +60,6 @@ public class ConfigurationDaoTest extends DaoContext {
         directtExchangeEntity.setName(EXCHANGE_NAME_2);
         directtExchangeEntity.setType(EXCHANGE_TYPE_2);
         
-//        QueueEntity queueEntity = new QueueEntityImpl();
-//        queueEntity.setKey(KEY);
-//        queueEntity.setName(QUEUE_NAME_1);
-//        
-//        BindingEntity bindingEntity = new BindingEntityImpl();
-//        bindingEntity.setKey(KEY);
-//        bindingEntity.setExchange(fanoutExchangeEntity);
-//        bindingEntity.setQueue(queueEntity);
-//        configDao.save(bindingEntity);
-        
         SenderChannelEntity senderChannelEntity = new SenderChannelEntityImpl();
         senderChannelEntity.setExchange(fanoutExchangeEntity);
         senderChannelEntity.setKey(KEY);
@@ -80,6 +69,27 @@ public class ConfigurationDaoTest extends DaoContext {
         senderChannelEntity.setExchange(directtExchangeEntity);
         senderChannelEntity.setKey(KEY);
         configDao.save(senderChannelEntity);
+        
+        QueueEntity queueEntity = new QueueEntityImpl();
+        queueEntity.setKey(KEY);
+        queueEntity.setName(QUEUE_NAME_1);
+        BindingEntity bindingEntity = new BindingEntityImpl();
+        bindingEntity.setKey(KEY);
+        bindingEntity.setExchange(fanoutExchangeEntity);
+        bindingEntity.setQueue(queueEntity);
+        configDao.save(bindingEntity);
+        
+        queueEntity = new QueueEntityImpl();
+        queueEntity.setKey(KEY);
+        queueEntity.setName(QUEUE_NAME_2);
+        
+        configDao.save(queueEntity);
+        
+    }
+    
+    @Test
+    public void testFindQueues(){
+        Assert.assertNotEquals(0, configDao.findQueues().size());
     }
   
 }

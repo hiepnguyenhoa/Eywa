@@ -4,8 +4,6 @@ import me.hnguyen.eywa.config.bean.SenderChannelBeanImpl;
 import me.hnguyen.eywa.config.dto.ExchangeDto;
 import me.hnguyen.eywa.config.dto.ExchangeDtoImpl;
 import me.hnguyen.eywa.config.dto.SenderChannelDtoImpl;
-import org.springframework.beans.BeanUtils;
-import org.springframework.stereotype.Component;
 import me.hnguyen.eywa.config.dto.SenderChannelDto;
 import me.hnguyen.eywa.util.EywaBeanUtils;
 import org.neo4j.ogm.annotation.NodeEntity;

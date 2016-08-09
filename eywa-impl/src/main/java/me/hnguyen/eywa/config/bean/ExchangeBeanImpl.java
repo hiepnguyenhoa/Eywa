@@ -11,25 +11,12 @@ import org.springframework.beans.factory.annotation.Value;
 @NodeEntity(label = "Exchange")
 public class ExchangeBeanImpl extends ConfigBeanAbst implements ExchangeBean {
 
-    @Value("${exchange.name}")
-    private String name;
     @Value("${exchange.type}")
     private String type;
 
     @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
     public void setType(String type) {
-
-        this.type = type.toString();
+        this.type = type;
     }
 
     @Override

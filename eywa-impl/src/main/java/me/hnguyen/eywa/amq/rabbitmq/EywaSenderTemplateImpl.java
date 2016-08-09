@@ -24,7 +24,10 @@ public class EywaSenderTemplateImpl implements EywaSenderTemplate {
     @PostConstruct
     public void rabbitTemplate() {
         rabbitTemplate = serverConfig.getRabbitTemplate(TMP_HOST_KEY);
-        rabbitTemplate.setExchange(serverConfig.getExchange(TMP_EXCHANGE_KEY).getName());
+        Exchange exchange = serverConfig.getExchange(TMP_EXCHANGE_KEY);
+        if (exchange != null) {
+            rabbitTemplate.setExchange(exchange.getName());
+        }
     }
 
     @Override

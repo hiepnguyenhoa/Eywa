@@ -1,6 +1,5 @@
 package me.hnguyen.eywa.config.dto;
 
-import me.hnguyen.eywa.BaseDto;
 import me.hnguyen.eywa.config.bean.BindingBean;
 import me.hnguyen.eywa.config.entity.BindingEntity;
 
