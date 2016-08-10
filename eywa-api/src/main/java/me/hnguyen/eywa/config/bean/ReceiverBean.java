@@ -5,14 +5,18 @@ import java.util.List;
 /**
  *
  * @author hnguyen
- * @param <B> Binding
+ * @param <Q>
  */
-public interface ReceiverBean<B extends BindingBean> extends ConfigBean {
+public interface ReceiverBean<Q extends QueueBean> extends ConfigBean {
 
-    public void setBindings(List<BindingBean> bindings);
+    public void setQueues(List<QueueBean> queues);
 
-    public List<BindingBean> getBindings();
+    public List<QueueBean> getQueues();
 
-    public void addBinding(B b);
+    public QueueBean getQueue(String name);
+
+    public void addQueue(QueueBean queue);
+
+    public QueueBean removeQueue(String name);
 
 }

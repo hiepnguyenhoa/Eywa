@@ -6,9 +6,9 @@ import me.hnguyen.eywa.config.dto.ReceiverDto;
 /**
  *
  * @author hnguyen
- * @param <B> BindingEntity
+ * @param <T>
  */
-public interface ReceiverEntity<B extends BindingEntity>
-        extends ReceiverBean<B>, ConfigEntity<ReceiverDto> {
+public interface ReceiverEntity<T extends QueueEntity>
+        extends ReceiverBean<T>, ConfigEntity<ReceiverDto> {
     
 }

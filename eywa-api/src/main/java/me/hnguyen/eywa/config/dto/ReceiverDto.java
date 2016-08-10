@@ -1,14 +1,14 @@
 package me.hnguyen.eywa.config.dto;
 
-import me.hnguyen.eywa.BaseDto;
 import me.hnguyen.eywa.config.bean.ReceiverBean;
 import me.hnguyen.eywa.config.entity.ReceiverEntity;
 
 /**
  *
  * @author hnguyen
+ * @param <B>
  */
-public interface ReceiverDto<B extends BindingDto> 
+public interface ReceiverDto<B extends QueueDto> 
         extends ReceiverBean<B>, ConfigDto<ReceiverEntity> {
     
 }

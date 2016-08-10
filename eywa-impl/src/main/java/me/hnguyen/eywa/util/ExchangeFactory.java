@@ -1,7 +1,7 @@
 package me.hnguyen.eywa.util;
 
 import me.hnguyen.eywa.amq.exception.CreateExchangeException;
-import me.hnguyen.eywa.config.dto.ExchangeDto;
+import me.hnguyen.eywa.config.bean.ExchangeBean;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Exchange;
 import static org.springframework.amqp.core.ExchangeTypes.*;
@@ -16,7 +16,7 @@ public class ExchangeFactory {
 
     private static final String EXCEPTION_MSG = "Unsupport the exchange type";
 
-    public static Exchange createExchange(ExchangeDto exchangeConf) {
+    public static Exchange createExchange(ExchangeBean exchangeConf) {
         Exchange exchange = null;
         switch (exchangeConf.getType()) {
             case DIRECT:

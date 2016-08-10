@@ -3,6 +3,8 @@ package me.hnguyen.eywa.amq;
 import java.util.List;
 import javax.inject.Inject;
 import me.hnguyen.eywa.amq.rabbitmq.EywaAMQServerConfig;
+import me.hnguyen.eywa.amq.rabbitmq.EywaSenderTemplate;
+import me.hnguyen.eywa.amq.rabbitmq.EywaSenderTemplateImpl;
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.Exchange;
@@ -29,20 +31,24 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
     @PropertySource("classpath:/yewa_rabbit_init.properties")})
 public class RabbitConfig {
     
-    private static final String DEFAULT_KEY = "localhost";
+    private static final String DEFAULT_KEY = "localhost_localhost";
 
     @Inject
     private EywaAMQServerConfig eywaAMQServerConfig;
 
+//    @Bean
+//    public List<AmqpAdmin> amqpAdmins() {
+//        return eywaAMQServerConfig.getAmqAdmins();
+//    }
+    
     @Bean
-    public AmqpAdmin amqpAdmin() {
-        RabbitAdmin rabbitAdmin = (RabbitAdmin) eywaAMQServerConfig.getAmqpAdmin(DEFAULT_KEY);
-        return rabbitAdmin;
+    public AmqpAdmin amqpAdmins() {
+        return eywaAMQServerConfig.getAmqpAdmin(DEFAULT_KEY);
     }
 
     @Bean
-    public RabbitTemplate rabbitTemplate() {
-        return eywaAMQServerConfig.getRabbitTemplate(DEFAULT_KEY);
+    public List<RabbitTemplate> rabbitTemplates() {
+        return eywaAMQServerConfig.getRabbitTemplates();
     }
 
     @Bean

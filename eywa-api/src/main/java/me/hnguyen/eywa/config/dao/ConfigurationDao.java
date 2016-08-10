@@ -32,10 +32,10 @@ public interface ConfigurationDao<T extends ConfigEntity> extends EywaDao<T> {
     @Query("MATCH (n:Queue)-[]-() RETURN n")
     public <T extends QueueEntity> List<T> findQueues();
 
-    @Query("MATCH (n:Binding) RETURN n")
+    @Query("MATCH p=(:Binding)-[r]->(n) RETURN p,r,n")
     public <T extends BindingEntity> List<T> findBindings();
     
-    @Query("MATCH p=(:Receiver)-[:BINDINGS]->()-[]-() RETURN p")
+    @Query("MATCH p=(:Receiver)-[:BINDINGS]->() RETURN p")
     public List<ReceiverEntity> findReceivers();
 
 }

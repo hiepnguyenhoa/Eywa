@@ -1,6 +1,9 @@
 package me.hnguyen.eywa.util;
 
 import me.hnguyen.eywa.amq.exception.CreateBindingException;
+import me.hnguyen.eywa.config.bean.QueueBean;
+import me.hnguyen.eywa.config.dto.BindingDto;
+import org.apache.commons.lang3.Validate;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
@@ -20,8 +23,10 @@ import org.springframework.amqp.core.TopicExchange;
  * @author hnguyen
  */
 public class BindingFactory {
-
+    
     public static Binding createBinding(Queue amqQueue, Exchange amqExchange, String routingKey) {
+        Validate.notNull(amqQueue);
+        Validate.notNull(amqExchange);
         Binding binding = null;
         switch (amqExchange.getType()) {
             case DIRECT:
@@ -54,4 +59,5 @@ public class BindingFactory {
     public static Binding createBindingForFanoutExchange(Queue amqQueue, FanoutExchange amqExchange) {
         return BindingBuilder.bind(amqQueue).to(amqExchange);
     }
+
 }

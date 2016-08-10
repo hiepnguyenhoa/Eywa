@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import me.hnguyen.eywa.BaseDto;
 import me.hnguyen.eywa.BaseEntity;
+import me.hnguyen.eywa.config.bean.ConfigBean;
 import me.hnguyen.eywa.config.dto.ConfigDto;
 import org.springframework.beans.BeanUtils;
 
@@ -32,9 +33,9 @@ public class EywaBeanUtils {
         return target;
     }
     
-    public static String buildConfigBeanKey(ConfigDto configDto) {
+    public static String buildConfigBeanKey(ConfigBean configBean) {
         StringBuilder key = new StringBuilder();
-        key.append(configDto.getKey()).append("_").append(configDto.getName());
+        key.append(configBean.getKey()).append("_").append(configBean.getName());
         return key.toString();
     }
 

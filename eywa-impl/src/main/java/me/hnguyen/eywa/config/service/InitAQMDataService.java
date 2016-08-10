@@ -38,15 +38,19 @@ public class InitAQMDataService {
     @Transactional
     public void initData(){
         configDao.save(hostEntity);
+        
         SenderEntity senderEntity = new SenderEntityImpl();
         senderEntity.setExchange(exchangeEntity);
         configDao.save(senderEntity);
+        
         List<BindingEntity> bindingEntities = new ArrayList<>();
         bindingEntity.setExchange(exchangeEntity);
         bindingEntity.setQueue(queueEntity);
         bindingEntities.add(bindingEntity);
+        configDao.save(bindingEntities);
+        
         ReceiverEntity receiverEntity = new ReceiverEntityImpl();
-        receiverEntity.setBindings(bindingEntities);
+        receiverEntity.addQueue(queueEntity);
         configDao.save(receiverEntity);
     }
 }

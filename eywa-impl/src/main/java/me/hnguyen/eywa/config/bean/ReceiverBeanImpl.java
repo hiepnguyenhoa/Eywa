@@ -2,60 +2,49 @@ package me.hnguyen.eywa.config.bean;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import me.hnguyen.eywa.util.LambdaUtils;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 /**
  *
  * @author hnguyen
- * @param <B>
+ * @param <Q>
  */
 @NodeEntity(label = "Receiver")
-public class ReceiverBeanImpl<B extends BindingBean> extends ConfigBeanAbst implements ReceiverBean<B> {
+public class ReceiverBeanImpl<T extends QueueBean> extends ConfigBeanAbst implements ReceiverBean<T> {
 
     /**
      * due to a bug in Neo4J
      */
-    private List<BindingBean> bindings;
+    private List<QueueBean> queues = new ArrayList<>();
 
     @Override
-    public List<BindingBean> getBindings() {
-        return bindings;
+    public List<QueueBean> getQueues() {
+        return (List<QueueBean>) queues;
     }
 
     @Override
-    public void setBindings(List<BindingBean> bindings) {
-        this.bindings = (List<BindingBean>) bindings;
+    public void setQueues(List<QueueBean> queues) {
+        this.queues = (List<QueueBean>) queues;
     }
 
     @Override
-    public void addBinding(B b) {
-        synchronized (this) {
-            if (this.bindings == null) {
-                bindings = new ArrayList<>();
+    public QueueBean getQueue(String name) {
+        for(QueueBean queue:queues){
+            if(queue.getName().equals(name)){
+                return queue;
             }
         }
-        this.bindings.add(b);
-    }
-    
-    @Override
-    public boolean equals(Object obj){
-        if(obj==null){
-            return false;
-        }
-        if(!(obj instanceof ReceiverBeanImpl)){
-            return false;
-        }
-        ReceiverBeanImpl tmp = (ReceiverBeanImpl) obj;
-        return LambdaUtils.compare_object.apply(this.name, tmp.name);
+        return null;
     }
 
     @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 17 * hash + Objects.hashCode(this.name);
-        return hash;
+    public void addQueue(QueueBean queue) {
+        this.queues.add(queue);
+    }
+
+    @Override
+    public QueueBean removeQueue(String name) {
+        throw new UnsupportedOperationException();
     }
 
 }

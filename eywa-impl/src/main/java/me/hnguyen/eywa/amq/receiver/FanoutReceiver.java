@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class FanoutReceiver {
 
-//    @RabbitListener(queues = "queue.1")
+//    @RabbitListener(queues = "localhost")
     public void processMessage(String msg) {
         System.out.println(msg);
     }

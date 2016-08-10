@@ -14,7 +14,6 @@ import me.hnguyen.eywa.config.dto.HostDto;
 import me.hnguyen.eywa.config.dto.QueueDto;
 import me.hnguyen.eywa.config.dto.ReceiverDto;
 import me.hnguyen.eywa.config.service.ConfigurationService;
-import me.hnguyen.eywa.util.BindingFactory;
 import me.hnguyen.eywa.util.ExchangeFactory;
 import me.hnguyen.eywa.util.EywaBeanUtils;
 import org.apache.commons.lang3.Validate;
@@ -30,8 +29,10 @@ import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import me.hnguyen.eywa.config.dto.SenderDto;
-import me.hnguyen.eywa.config.entity.ReceiverEntity;
 import me.hnguyen.eywa.config.service.InitAQMDataService;
+import me.hnguyen.eywa.util.BindingFactory;
+import me.hnguyen.eywa.util.QueueFactory;
+import org.springframework.amqp.core.AmqpAdmin;
 
 /**
  *
@@ -45,6 +46,11 @@ public class EywaAMQServerConfigImpl implements EywaAMQServerConfig {
     @Inject
     private ConfigurationService configService;
     private final MessageConverter msgConverter = new Jackson2JsonMessageConverter();
+
+    private List<SenderDto> senderDtos;
+    private List<ReceiverDto> receiverDtos;
+    private List<BindingDto> bindingDtos;
+
     private final Map<String, ConnectionFactory> connFactories = new HashMap<>();
     private final Map<String, Exchange> amqExchanges = new HashMap<>();
     private final Map<String, Queue> amqQueues = new HashMap<>();
@@ -54,12 +60,20 @@ public class EywaAMQServerConfigImpl implements EywaAMQServerConfig {
     @Override
     public void initialize() {
         initialData();
-        initConnectionFactories();
-        initSender();
-        initReceiver();
-        initExchanges();
-        initQueues();
-        bindings();
+        initConnections();
+        initBindings();
+        initSenders();
+        initReceivers();
+    }
+
+    @Override
+    public List<AmqpAdmin> getAmqAdmins() {
+        final List<AmqpAdmin> rabbitAdmins = new ArrayList<>();
+        connFactories.values().stream().forEach((connFactory) -> {
+            RabbitAdmin rabbitAdmin = new RabbitAdmin(connFactory);
+            rabbitAdmins.add(rabbitAdmin);
+        });
+        return rabbitAdmins;
     }
 
     @Override
@@ -67,6 +81,17 @@ public class EywaAMQServerConfigImpl implements EywaAMQServerConfig {
         ConnectionFactory connectionFactory = getConnectionFactory(key);
         RabbitAdmin rabbitAdmin = new RabbitAdmin(connectionFactory);
         return rabbitAdmin;
+    }
+    
+    @Override
+    public List<RabbitTemplate> getRabbitTemplates(){
+        List<ConnectionFactory> connFacts = getConnectionFactories();
+        List<RabbitTemplate> rabbitTemplates = new ArrayList<>();
+        for(ConnectionFactory connFact: connFacts){
+            RabbitTemplate template = new RabbitTemplate(connFact);
+            rabbitTemplates.add(template);
+        }
+        return rabbitTemplates;
     }
 
     @Override
@@ -109,6 +134,11 @@ public class EywaAMQServerConfigImpl implements EywaAMQServerConfig {
         Validate.notNull(key);
         return connFactories.get(key);
     }
+    
+    @Override
+    public List<ConnectionFactory> getConnectionFactories(){
+        return new ArrayList(this.connFactories.values());
+    }
 
     @Override
     public Binding getBinding(String key) {
@@ -120,18 +150,18 @@ public class EywaAMQServerConfigImpl implements EywaAMQServerConfig {
     public List<Binding> getBindings() {
         return new ArrayList(this.amqBindings.values());
     }
-    
-    private void initialData(){
+
+    private void initialData() {
         List<HostDto> hostDtos = configService.getHostConfig();
-        if(hostDtos.isEmpty()){
+        if (hostDtos.isEmpty()) {
             initAQMDataService.initData();
         }
     }
 
-    private void initConnectionFactories() {
+    private void initConnections() {
         List<HostDto> hostDtos = configService.getHostConfig();
         hostDtos.stream().forEach((hostDto) -> {
-            connFactories.put(hostDto.getKey(), createConnectionFactory(hostDto));
+            connFactories.put(EywaBeanUtils.buildConfigBeanKey(hostDto), createConnectionFactory(hostDto));
         });
     }
 
@@ -139,56 +169,40 @@ public class EywaAMQServerConfigImpl implements EywaAMQServerConfig {
      * TODO: expected ExchangeDto but ExchangeBean. remove toExchangeDto() when
      * fixed
      */
-    private void initSender() {
-        List<SenderDto> senderDtos = configService.getSenders();
+    private void initSenders() {
+        senderDtos = configService.getSenders();
         for (SenderDto senderChannel : senderDtos) {
             ExchangeDto exchangeDto = this.toExchangeDto(senderChannel.getExchange());
             String key = EywaBeanUtils.buildConfigBeanKey(exchangeDto);
             amqExchanges.put(key, ExchangeFactory.createExchange(exchangeDto));
         }
     }
-    
-    private void initReceiver(){
-        List<ReceiverDto> receiverDtos = configService.getReceivers();
-        
-    }
-    
-    private void initExchanges() {
-        List<ExchangeDto> exchangeDtos = configService.getExchanges();
-        exchangeDtos.stream().forEach((exchangeDto)->{
-            String key = EywaBeanUtils.buildConfigBeanKey(exchangeDto);
-            Exchange amqQxchange = ExchangeFactory.createExchange(exchangeDto);
-            amqExchanges.put(key, amqQxchange);
-        });
-    }
 
-    private void initQueues() {
-        List<QueueDto> queueDtos = configService.getQueueDtos();
-        queueDtos.stream().forEach((queueDto) -> {
-            String key = EywaBeanUtils.buildConfigBeanKey(queueDto);
-            Queue amqQueue = new Queue(
-                    queueDto.getName(),
-                    queueDto.isDurable(),
-                    queueDto.isExclusive(),
-                    queueDto.isAutoDelete());
-            this.amqQueues.put(key, amqQueue);
-        });
+    private void initReceivers() {
+        receiverDtos = configService.getReceivers();
+        for (ReceiverDto receiverDto : receiverDtos) {
+            List<QueueDto> queueDtos = receiverDto.getQueues();
+            for (QueueDto queueDto : queueDtos) {
+                String key = EywaBeanUtils.buildConfigBeanKey(queueDto);
+                Queue amqQueue = new Queue(
+                        queueDto.getName(),
+                        queueDto.isDurable(),
+                        queueDto.isExclusive(),
+                        queueDto.isAutoDelete());
+                this.amqQueues.put(key, amqQueue);
+            }
+        }
     }
-
-    private void bindings() {
-        List<BindingDto> bindingDtos = configService.getBindings();
+    
+    private void initBindings(){
+        bindingDtos = configService.getBindings();
         bindingDtos.stream().forEach((bindingDto) -> {
-            String key = EywaBeanUtils.buildConfigBeanKey(bindingDto);
-            Binding binding = buildAMQBinding(bindingDto);
-            this.amqBindings.put(key, binding);
+            Queue queue = QueueFactory.createQueue(bindingDto.getQueue());
+            Exchange exchange = ExchangeFactory.createExchange(bindingDto.getExchange());
+            Binding binding = BindingFactory.createBinding(queue, exchange, bindingDto.getRoutingKey());
+            amqBindings.put(EywaBeanUtils.buildConfigBeanKey(bindingDto), binding);
+            amqQueues.put(EywaBeanUtils.buildConfigBeanKey(bindingDto.getQueue()), queue);
         });
-    }
-
-    private Binding buildAMQBinding(BindingDto bindingDto) {
-        String key = EywaBeanUtils.buildConfigBeanKey(bindingDto);
-        Queue queue = getQueue(key);
-        Exchange exchange = getExchange(key);
-        return BindingFactory.createBinding(queue, exchange, key);
     }
 
     private ConnectionFactory createConnectionFactory(HostDto hostDto) {
@@ -205,7 +219,5 @@ public class EywaAMQServerConfigImpl implements EywaAMQServerConfig {
         BeanUtils.copyProperties(exchangeBean, exchangeDto);
         return exchangeDto;
     }
-
-    
 
 }
