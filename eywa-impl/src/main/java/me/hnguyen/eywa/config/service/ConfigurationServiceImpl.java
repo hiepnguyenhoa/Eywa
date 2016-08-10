@@ -7,9 +7,10 @@ import me.hnguyen.eywa.config.dto.BindingDto;
 import me.hnguyen.eywa.config.dto.ExchangeDto;
 import me.hnguyen.eywa.config.dto.HostDto;
 import me.hnguyen.eywa.config.dto.QueueDto;
-import me.hnguyen.eywa.config.dto.SenderChannelDto;
+import me.hnguyen.eywa.config.dto.ReceiverDto;
 import me.hnguyen.eywa.util.EywaBeanUtils;
 import org.springframework.stereotype.Component;
+import me.hnguyen.eywa.config.dto.SenderDto;
 
 /**
  *
@@ -28,8 +29,8 @@ public class ConfigurationServiceImpl implements ConfigurationService {
     }
 
     @Override
-    public List<SenderChannelDto> getSenderChannels() {
-        return EywaBeanUtils.toDto(configDAO.findSenderChannels());
+    public List<SenderDto> getSenders() {
+        return EywaBeanUtils.toDto(configDAO.findSenders());
     }
 
     @Override
@@ -45,6 +46,11 @@ public class ConfigurationServiceImpl implements ConfigurationService {
     @Override
     public List<ExchangeDto> getExchanges() {
         return EywaBeanUtils.toDto(configDAO.findExchanges());
+    }
+
+    @Override
+    public <T extends ReceiverDto> List<T> getReceivers() {
+        return EywaBeanUtils.toDto(configDAO.findReceivers());
     }
 
 }

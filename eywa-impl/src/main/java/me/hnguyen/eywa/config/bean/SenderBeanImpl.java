@@ -9,10 +9,10 @@ import org.neo4j.ogm.annotation.NodeEntity;
  * @author hnguyen
  * @param <E>
  */
-@NodeEntity(label = "SenderChannel")
-public class SenderChannelBeanImpl< E extends ExchangeBean>
+@NodeEntity(label = "Sender")
+public class SenderBeanImpl< E extends ExchangeBean>
         extends ConfigBeanAbst
-        implements SenderChannelBean<E> {
+        implements SenderBean<E> {
 
     private E exchange;
 
@@ -31,11 +31,11 @@ public class SenderChannelBeanImpl< E extends ExchangeBean>
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof SenderChannelBeanImpl)) {
+        if (!(obj instanceof SenderBeanImpl)) {
             return false;
         }
 
-        return LambdaUtils.compare_object.apply(this.key, ((SenderChannelBeanImpl) obj).getKey());
+        return LambdaUtils.compare_object.apply(this.key, ((SenderBeanImpl) obj).getKey());
     }
 
     @Override

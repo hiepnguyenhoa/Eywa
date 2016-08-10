@@ -1,26 +1,27 @@
 package me.hnguyen.eywa.config.entity;
 
-import me.hnguyen.eywa.config.bean.SenderChannelBeanImpl;
+import me.hnguyen.eywa.config.bean.SenderBeanImpl;
 import me.hnguyen.eywa.config.dto.ExchangeDto;
 import me.hnguyen.eywa.config.dto.ExchangeDtoImpl;
-import me.hnguyen.eywa.config.dto.SenderChannelDtoImpl;
-import me.hnguyen.eywa.config.dto.SenderChannelDto;
+import me.hnguyen.eywa.config.dto.SenderDtoImpl;
 import me.hnguyen.eywa.util.EywaBeanUtils;
 import org.neo4j.ogm.annotation.NodeEntity;
+import me.hnguyen.eywa.config.dto.SenderDto;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author hnguyen
  */
-
-@NodeEntity(label = "SenderChannel")
-public class SenderChannelEntityImpl
-        extends SenderChannelBeanImpl<ExchangeEntity>
-        implements SenderChannelEntity<ExchangeEntity> {
+@Component
+@NodeEntity(label = "Sender")
+public class SenderEntityImpl
+        extends SenderBeanImpl<ExchangeEntity>
+        implements SenderEntity<ExchangeEntity> {
     
     @Override
-    public SenderChannelDto toDto() {
-        SenderChannelDto senderChannelDto = new SenderChannelDtoImpl();
+    public SenderDto toDto() {
+        SenderDto senderChannelDto = new SenderDtoImpl();
         ExchangeDto exchangeDto = new ExchangeDtoImpl();
         exchangeDto = (ExchangeDto) EywaBeanUtils.copyProperties(this.getExchange(), exchangeDto);
         senderChannelDto.setExchange(exchangeDto);

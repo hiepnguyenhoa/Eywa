@@ -11,33 +11,21 @@ import org.neo4j.ogm.annotation.NodeEntity;
  * @author hnguyen
  * @param <B>
  */
-@NodeEntity(label = "ReceiverChannel")
-public class ReceiverChannelBeanImpl<B extends BindingBean> extends ConfigBeanAbst implements ReceiverChannelBean<B> {
+@NodeEntity(label = "Receiver")
+public class ReceiverBeanImpl<B extends BindingBean> extends ConfigBeanAbst implements ReceiverBean<B> {
 
     /**
      * due to a bug in Neo4J
      */
     private List<BindingBean> bindings;
-    
-    private String name;
-    
+
     @Override
-    public String getName() {
-        return name;
+    public List<BindingBean> getBindings() {
+        return bindings;
     }
 
     @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public List<B> getBindings() {
-        return (List<B>) bindings;
-    }
-
-    @Override
-    public void setBindings(List<B> bindings) {
+    public void setBindings(List<BindingBean> bindings) {
         this.bindings = (List<BindingBean>) bindings;
     }
 
@@ -56,10 +44,10 @@ public class ReceiverChannelBeanImpl<B extends BindingBean> extends ConfigBeanAb
         if(obj==null){
             return false;
         }
-        if(!(obj instanceof ReceiverChannelBeanImpl)){
+        if(!(obj instanceof ReceiverBeanImpl)){
             return false;
         }
-        ReceiverChannelBeanImpl tmp = (ReceiverChannelBeanImpl) obj;
+        ReceiverBeanImpl tmp = (ReceiverBeanImpl) obj;
         return LambdaUtils.compare_object.apply(this.name, tmp.name);
     }
 

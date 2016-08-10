@@ -10,11 +10,11 @@ import me.hnguyen.eywa.config.entity.HostEntity;
 import me.hnguyen.eywa.config.entity.HostEntityImpl;
 import me.hnguyen.eywa.config.entity.QueueEntity;
 import me.hnguyen.eywa.config.entity.QueueEntityImpl;
-import me.hnguyen.eywa.config.entity.SenderChannelEntity;
-import me.hnguyen.eywa.config.entity.SenderChannelEntityImpl;
+import me.hnguyen.eywa.config.entity.SenderEntityImpl;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
+import me.hnguyen.eywa.config.entity.SenderEntity;
 
 /**
  *
@@ -60,12 +60,12 @@ public class ConfigurationDaoTest extends DaoContext {
         directtExchangeEntity.setName(EXCHANGE_NAME_2);
         directtExchangeEntity.setType(EXCHANGE_TYPE_2);
         
-        SenderChannelEntity senderChannelEntity = new SenderChannelEntityImpl();
+        SenderEntity senderChannelEntity = new SenderEntityImpl();
         senderChannelEntity.setExchange(fanoutExchangeEntity);
         senderChannelEntity.setKey(KEY);
         configDao.save(senderChannelEntity);
         
-        senderChannelEntity = new SenderChannelEntityImpl();
+        senderChannelEntity = new SenderEntityImpl();
         senderChannelEntity.setExchange(directtExchangeEntity);
         senderChannelEntity.setKey(KEY);
         configDao.save(senderChannelEntity);

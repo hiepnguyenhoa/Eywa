@@ -26,9 +26,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 @EnableRabbit
 @ComponentScan(basePackages = {"me.hnguyen.eywa"})
 @PropertySources({
-    @PropertySource("classpath:/me/hnguyen/eywa/eywa_rabbitmq_host.properties"),
-    @PropertySource("classpath:/me/hnguyen/eywa/eywa_rabbitmq_exchange.properties"),
-    @PropertySource("classpath:/me/hnguyen/eywa/eywa_rabbitmq_queue.properties")})
+    @PropertySource("classpath:/yewa_rabbit_init.properties")})
 public class RabbitConfig {
     
     private static final String DEFAULT_KEY = "localhost";

@@ -12,7 +12,7 @@ import me.hnguyen.eywa.config.dto.ExchangeDto;
 import me.hnguyen.eywa.config.dto.ExchangeDtoImpl;
 import me.hnguyen.eywa.config.dto.HostDto;
 import me.hnguyen.eywa.config.dto.QueueDto;
-import me.hnguyen.eywa.config.dto.SenderChannelDto;
+import me.hnguyen.eywa.config.dto.ReceiverDto;
 import me.hnguyen.eywa.config.service.ConfigurationService;
 import me.hnguyen.eywa.util.BindingFactory;
 import me.hnguyen.eywa.util.ExchangeFactory;
@@ -29,6 +29,9 @@ import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
+import me.hnguyen.eywa.config.dto.SenderDto;
+import me.hnguyen.eywa.config.entity.ReceiverEntity;
+import me.hnguyen.eywa.config.service.InitAQMDataService;
 
 /**
  *
@@ -37,6 +40,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class EywaAMQServerConfigImpl implements EywaAMQServerConfig {
 
+    @Inject
+    private InitAQMDataService initAQMDataService;
     @Inject
     private ConfigurationService configService;
     private final MessageConverter msgConverter = new Jackson2JsonMessageConverter();
@@ -48,11 +53,13 @@ public class EywaAMQServerConfigImpl implements EywaAMQServerConfig {
     @PostConstruct
     @Override
     public void initialize() {
+        initialData();
         initConnectionFactories();
-//        initSenderExchanges();
+        initSender();
+        initReceiver();
         initExchanges();
         initQueues();
-        initBindings();
+        bindings();
     }
 
     @Override
@@ -113,6 +120,13 @@ public class EywaAMQServerConfigImpl implements EywaAMQServerConfig {
     public List<Binding> getBindings() {
         return new ArrayList(this.amqBindings.values());
     }
+    
+    private void initialData(){
+        List<HostDto> hostDtos = configService.getHostConfig();
+        if(hostDtos.isEmpty()){
+            initAQMDataService.initData();
+        }
+    }
 
     private void initConnectionFactories() {
         List<HostDto> hostDtos = configService.getHostConfig();
@@ -125,13 +139,18 @@ public class EywaAMQServerConfigImpl implements EywaAMQServerConfig {
      * TODO: expected ExchangeDto but ExchangeBean. remove toExchangeDto() when
      * fixed
      */
-    private void initSenderExchanges() {
-        List<SenderChannelDto> senderChannelDtos = configService.getSenderChannels();
-        for (SenderChannelDto senderChannel : senderChannelDtos) {
+    private void initSender() {
+        List<SenderDto> senderDtos = configService.getSenders();
+        for (SenderDto senderChannel : senderDtos) {
             ExchangeDto exchangeDto = this.toExchangeDto(senderChannel.getExchange());
             String key = EywaBeanUtils.buildConfigBeanKey(exchangeDto);
             amqExchanges.put(key, ExchangeFactory.createExchange(exchangeDto));
         }
+    }
+    
+    private void initReceiver(){
+        List<ReceiverDto> receiverDtos = configService.getReceivers();
+        
     }
     
     private void initExchanges() {
@@ -145,7 +164,6 @@ public class EywaAMQServerConfigImpl implements EywaAMQServerConfig {
 
     private void initQueues() {
         List<QueueDto> queueDtos = configService.getQueueDtos();
-        System.out.println("*********** QueueDtos.size() : " + queueDtos.size());
         queueDtos.stream().forEach((queueDto) -> {
             String key = EywaBeanUtils.buildConfigBeanKey(queueDto);
             Queue amqQueue = new Queue(
@@ -157,9 +175,8 @@ public class EywaAMQServerConfigImpl implements EywaAMQServerConfig {
         });
     }
 
-    private void initBindings() {
+    private void bindings() {
         List<BindingDto> bindingDtos = configService.getBindings();
-        System.out.println("*********** BindingDtos.size() : " + bindingDtos.size());
         bindingDtos.stream().forEach((bindingDto) -> {
             String key = EywaBeanUtils.buildConfigBeanKey(bindingDto);
             Binding binding = buildAMQBinding(bindingDto);
