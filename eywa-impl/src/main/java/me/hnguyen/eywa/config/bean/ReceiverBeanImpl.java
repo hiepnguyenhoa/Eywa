@@ -9,7 +9,7 @@ import org.neo4j.ogm.annotation.NodeEntity;
  * @author hnguyen
  * @param <Q>
  */
-@NodeEntity(label = "Receiver")
+@NodeEntity
 public class ReceiverBeanImpl<T extends QueueBean> extends ConfigBeanAbst implements ReceiverBean<T> {
 
     /**

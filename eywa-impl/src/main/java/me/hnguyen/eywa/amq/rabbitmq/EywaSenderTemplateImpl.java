@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import org.apache.commons.lang3.Validate;
 import org.springframework.amqp.core.Exchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,8 +15,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class EywaSenderTemplateImpl implements EywaSenderTemplate {
 
-    private static final String TMP_HOST_KEY = "localhost_localhost";
-    private static final String TMP_EXCHANGE_KEY = "localhost_localhost";
+    @Value("${sender.key}")
+    private String key;
 
     @Inject
     private EywaAMQServerConfig serverConfig;
@@ -23,12 +24,7 @@ public class EywaSenderTemplateImpl implements EywaSenderTemplate {
 
     @PostConstruct
     public void rabbitTemplate() {
-        
-        rabbitTemplate = serverConfig.getRabbitTemplate(TMP_HOST_KEY);
-        Exchange exchange = serverConfig.getExchange(TMP_EXCHANGE_KEY);
-        if (exchange != null) {
-            rabbitTemplate.setExchange(exchange.getName());
-        }
+        rabbitTemplate = serverConfig.getRabbitTemplate(key);
     }
 
     @Override

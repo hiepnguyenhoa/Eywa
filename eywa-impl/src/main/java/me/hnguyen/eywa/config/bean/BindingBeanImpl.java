@@ -3,6 +3,7 @@ package me.hnguyen.eywa.config.bean;
 import java.util.Objects;
 import me.hnguyen.eywa.util.LambdaUtils;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  *
@@ -10,7 +11,7 @@ import org.neo4j.ogm.annotation.NodeEntity;
  * @param <E>
  * @param <Q>
  */
-@NodeEntity(label = "Binding")
+@NodeEntity
 public class BindingBeanImpl< E extends ExchangeBean, Q extends QueueBean>
         extends ConfigBeanAbst
         implements BindingBean<E, Q> {
@@ -19,6 +20,7 @@ public class BindingBeanImpl< E extends ExchangeBean, Q extends QueueBean>
 
     private Q queue;
 
+    @Value("${binding.routingKey}")
     private String routingKey;
 
     @Override

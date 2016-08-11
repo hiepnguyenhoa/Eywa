@@ -7,11 +7,11 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import me.hnguyen.eywa.config.bean.ExchangeBean;
+import me.hnguyen.eywa.config.bean.QueueBean;
 import me.hnguyen.eywa.config.dto.BindingDto;
 import me.hnguyen.eywa.config.dto.ExchangeDto;
 import me.hnguyen.eywa.config.dto.ExchangeDtoImpl;
 import me.hnguyen.eywa.config.dto.HostDto;
-import me.hnguyen.eywa.config.dto.QueueDto;
 import me.hnguyen.eywa.config.dto.ReceiverDto;
 import me.hnguyen.eywa.config.service.ConfigurationService;
 import me.hnguyen.eywa.util.ExchangeFactory;
@@ -45,6 +45,7 @@ public class EywaAMQServerConfigImpl implements EywaAMQServerConfig {
     private InitAQMDataService initAQMDataService;
     @Inject
     private ConfigurationService configService;
+    
     private final MessageConverter msgConverter = new Jackson2JsonMessageConverter();
 
     private List<SenderDto> senderDtos;
@@ -69,10 +70,19 @@ public class EywaAMQServerConfigImpl implements EywaAMQServerConfig {
     @Override
     public List<AmqpAdmin> getAmqAdmins() {
         final List<AmqpAdmin> rabbitAdmins = new ArrayList<>();
-        connFactories.values().stream().forEach((connFactory) -> {
+        for(ConnectionFactory connFactory: connFactories.values()){
             RabbitAdmin rabbitAdmin = new RabbitAdmin(connFactory);
+            for(Queue queue:amqQueues.values()){
+                rabbitAdmin.declareQueue(queue);
+            };
+            for(Exchange exchange:amqExchanges.values()){
+                rabbitAdmin.declareExchange(exchange);
+            };
+            for(Binding  binding:amqBindings.values()){
+                rabbitAdmin.declareBinding(binding);
+            };
             rabbitAdmins.add(rabbitAdmin);
-        });
+        };
         return rabbitAdmins;
     }
 
@@ -181,8 +191,8 @@ public class EywaAMQServerConfigImpl implements EywaAMQServerConfig {
     private void initReceivers() {
         receiverDtos = configService.getReceivers();
         for (ReceiverDto receiverDto : receiverDtos) {
-            List<QueueDto> queueDtos = receiverDto.getQueues();
-            for (QueueDto queueDto : queueDtos) {
+            List<QueueBean> queueDtos = receiverDto.getQueues();
+            for (QueueBean queueDto : queueDtos) {
                 String key = EywaBeanUtils.buildConfigBeanKey(queueDto);
                 Queue amqQueue = new Queue(
                         queueDto.getName(),

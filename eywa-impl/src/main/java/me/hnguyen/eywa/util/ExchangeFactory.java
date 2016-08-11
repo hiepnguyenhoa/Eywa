@@ -17,6 +17,9 @@ public class ExchangeFactory {
     private static final String EXCEPTION_MSG = "Unsupport the exchange type";
 
     public static Exchange createExchange(ExchangeBean exchangeConf) {
+        if (exchangeConf == null) {
+            return null;
+        }
         Exchange exchange = null;
         switch (exchangeConf.getType()) {
             case DIRECT:

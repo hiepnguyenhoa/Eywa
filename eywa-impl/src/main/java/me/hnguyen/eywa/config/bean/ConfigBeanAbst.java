@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
  *
  * @author hnguyen
  */
-@NodeEntity(label = "Config")
+@NodeEntity
 public abstract class ConfigBeanAbst extends BaseBeanAbst implements ConfigBean {
 
     @Value("${config.key}")

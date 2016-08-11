@@ -11,13 +11,14 @@ import me.hnguyen.eywa.config.dto.ReceiverDto;
 import me.hnguyen.eywa.util.EywaBeanUtils;
 import org.springframework.stereotype.Component;
 import me.hnguyen.eywa.config.dto.SenderDto;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author hnguyen
  */
 @Component
-//@Transactional
+@Transactional
 public class ConfigurationServiceImpl implements ConfigurationService {
 
     @Inject

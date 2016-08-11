@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
  *
  * @author hnguyen
  */
-@NodeEntity(label = "Host")
+@NodeEntity
 public class HostBeanImpl extends ConfigBeanAbst implements HostBean {
 
     @Value("${host.username}")

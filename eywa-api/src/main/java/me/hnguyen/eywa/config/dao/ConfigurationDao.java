@@ -29,13 +29,16 @@ public interface ConfigurationDao<T extends ConfigEntity> extends EywaDao<T> {
     @Query("MATCH (n:Exchange) RETURN n")
     public <T extends ExchangeEntity> List<T> findExchanges();
 
-    @Query("MATCH (n:Queue)-[]-() RETURN n")
+    @Query("MATCH (n:Queue) RETURN n")
     public <T extends QueueEntity> List<T> findQueues();
 
-    @Query("MATCH p=(:Binding)-[r]->(n) RETURN p,r,n")
+    @Query("MATCH p=(:Binding)-[]->() RETURN p")
     public <T extends BindingEntity> List<T> findBindings();
     
-    @Query("MATCH p=(:Receiver)-[:BINDINGS]->() RETURN p")
+    @Query("MATCH p=(:Receiver)-[]->() RETURN p")
     public List<ReceiverEntity> findReceivers();
+    
+    @Query("MATCH (n) RETURN n")
+    public List<ConfigEntity> findAllConfig();
 
 }

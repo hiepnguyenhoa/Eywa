@@ -3,7 +3,6 @@ package me.hnguyen.eywa.config.entity;
 import me.hnguyen.eywa.config.bean.BindingBeanImpl;
 import me.hnguyen.eywa.config.dto.BindingDto;
 import me.hnguyen.eywa.config.dto.BindingDtoImpl;
-import me.hnguyen.eywa.util.EywaBeanUtils;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.springframework.stereotype.Component;
 

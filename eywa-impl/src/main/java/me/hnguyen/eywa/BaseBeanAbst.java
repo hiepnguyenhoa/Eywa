@@ -1,11 +1,14 @@
 package me.hnguyen.eywa;
 
+import org.neo4j.ogm.annotation.GraphId;
+
 /**
  *
  * @author hnguyen
  */
 public abstract class BaseBeanAbst implements BaseBean{
     
+    @GraphId
     protected Long id;
 
     @Override

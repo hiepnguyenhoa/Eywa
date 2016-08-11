@@ -9,7 +9,7 @@ import org.neo4j.ogm.annotation.NodeEntity;
  * @author hnguyen
  * @param <E>
  */
-@NodeEntity(label = "Sender")
+@NodeEntity
 public class SenderBeanImpl< E extends ExchangeBean>
         extends ConfigBeanAbst
         implements SenderBean<E> {

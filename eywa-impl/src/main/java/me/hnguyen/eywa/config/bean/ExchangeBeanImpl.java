@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
  *
  * @author hnguyen
  */
-@NodeEntity(label = "Exchange")
+@NodeEntity
 public class ExchangeBeanImpl extends ConfigBeanAbst implements ExchangeBean {
 
     @Value("${exchange.type}")

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
  *
  * @author hnguyen
  */
-@NodeEntity(label = "Queue")
+@NodeEntity
 public class QueueBeanImpl extends ConfigBeanAbst implements QueueBean {
 
     @Value("${queue.durable}")
