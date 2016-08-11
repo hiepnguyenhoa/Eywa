@@ -219,6 +219,7 @@ public class EywaAMQServerConfigImpl implements EywaAMQServerConfig {
         Validate.notNull(hostDto);
         CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
         connectionFactory.setHost(hostDto.getName());
+        connectionFactory.setPort(hostDto.getPort());
         connectionFactory.setUsername(hostDto.getUsername());
         connectionFactory.setPassword(hostDto.getPassword());
         return connectionFactory;

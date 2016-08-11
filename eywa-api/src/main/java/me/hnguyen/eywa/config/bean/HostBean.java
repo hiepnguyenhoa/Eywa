@@ -6,8 +6,13 @@ package me.hnguyen.eywa.config.bean;
  */
 public interface HostBean extends ConfigBean {
 
+    public static final String AMQ_PORT = "post";
     public static final String USERNAME = "username";
     public static final String PASSWORD = "password";
+    
+    public void setPort(int port);
+    
+    public int getPort();
 
     public void setUsername(String username);
 

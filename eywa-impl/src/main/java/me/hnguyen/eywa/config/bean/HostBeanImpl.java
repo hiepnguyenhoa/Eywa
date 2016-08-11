@@ -10,11 +10,23 @@ import org.springframework.beans.factory.annotation.Value;
 @NodeEntity
 public class HostBeanImpl extends ConfigBeanAbst implements HostBean {
 
-    @Value("${host.username}")
+    @Value("${amq.port:5672}")
+    private int port;
+    @Value("${amq.username}")
     private String username;
-    @Value("${host.password}")
+    @Value("${amq.password}")
     private String password;
 
+    @Override
+    public int getPort() {
+        return port;
+    }
+
+    @Override
+    public void setPort(int port) {
+        this.port = port;
+    }
+    
     @Override
     public String getUsername() {
         return username;
