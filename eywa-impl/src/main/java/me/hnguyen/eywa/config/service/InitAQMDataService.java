@@ -20,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
  * @author hnguyen
  */
 @Component
-
 public class InitAQMDataService {
     
     @Inject

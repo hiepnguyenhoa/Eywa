@@ -16,8 +16,8 @@ import org.springframework.stereotype.Component;
 @Component
 @NodeEntity(label = "Sender")
 public class SenderEntityImpl
-        extends SenderBeanImpl<ExchangeEntity>
-        implements SenderEntity<ExchangeEntity> {
+        extends SenderBeanImpl<HostEntity, ExchangeEntity>
+        implements SenderEntity<HostEntity, ExchangeEntity> {
     
     @Override
     public SenderDto toDto() {

@@ -15,15 +15,15 @@ import me.hnguyen.eywa.config.dto.SenderDto;
 public interface ConfigurationService {
     
     public <T extends HostDto> List<T> getHostConfig();
+    
+    public <T extends SenderDto> List<T> getSenders(String key);
 
-    public <T extends SenderDto> List<T> getSenders();
+    public <T extends BindingDto> List<T> getBindings(String key);
 
-    public <T extends BindingDto> List<T> getBindings();
+    public <T extends QueueDto> List<T> getQueueDtos(String key);
 
-    public <T extends QueueDto> List<T> getQueueDtos();
+    public <T extends ExchangeDto> List<T> getExchanges(String key);
 
-    public <T extends ExchangeDto> List<T> getExchanges();
-
-    public <T extends ReceiverDto> List<T> getReceivers();
+    public <T extends ReceiverDto> List<T> getReceivers(String key);
     
 }

@@ -14,9 +14,9 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @NodeEntity(label = "Receiver")
-public class ReceiverEntityImpl<T extends QueueEntity>
-        extends ReceiverBeanImpl<T>
-        implements ReceiverEntity<T> {
+public class ReceiverEntityImpl<H extends HostEntity, T extends QueueEntity>
+        extends ReceiverBeanImpl<H, T>
+        implements ReceiverEntity<H, T> {
 
     /**
      * The method was implemented weirdly because of NEO4J bug with Collection of Generic.

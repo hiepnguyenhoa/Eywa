@@ -7,15 +7,28 @@ import org.neo4j.ogm.annotation.NodeEntity;
 /**
  *
  * @author hnguyen
- * @param <Q>
+ * @param <H> HostBean
+ * @param <T> QueueBean
  */
 @NodeEntity
-public class ReceiverBeanImpl<T extends QueueBean> extends ConfigBeanAbst implements ReceiverBean<T> {
+public class ReceiverBeanImpl<H extends HostBean, T extends QueueBean> extends ConfigBeanAbst implements ReceiverBean<H, T> {
 
     /**
      * due to a bug in Neo4J
      */
     private List<QueueBean> queues = new ArrayList<>();
+    
+    private H host;
+
+    @Override
+    public H getHost() {
+        return host;
+    }
+
+    @Override
+    public void setHost(H host) {
+        this.host = host;
+    }
 
     @Override
     public List<QueueBean> getQueues() {

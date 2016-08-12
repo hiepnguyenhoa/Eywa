@@ -1,6 +1,7 @@
 package me.hnguyen.eywa.util;
 
 import me.hnguyen.eywa.amq.exception.CreateBindingException;
+import me.hnguyen.eywa.config.bean.BindingBean;
 import me.hnguyen.eywa.config.bean.QueueBean;
 import me.hnguyen.eywa.config.dto.BindingDto;
 import org.apache.commons.lang3.Validate;
@@ -22,9 +23,18 @@ import org.springframework.amqp.core.TopicExchange;
  *
  * @author hnguyen
  */
-public class BindingFactory {
-    
-    public static Binding createBinding(Queue amqQueue, Exchange amqExchange, String routingKey) {
+public class EywaBindingFactory {
+
+    public static Binding createBinding(BindingBean bindingDto) {
+        Validate.notNull(bindingDto);
+        return createBinding(
+                EywaQueueFactory.createQueue(bindingDto.getQueue()),
+                EywaExchangeFactory.createExchange(bindingDto.getExchange()),
+                bindingDto.getRoutingKey()
+        );
+    }
+
+    private static Binding createBinding(Queue amqQueue, Exchange amqExchange, String routingKey) {
         Validate.notNull(amqQueue);
         Validate.notNull(amqExchange);
         Binding binding = null;
@@ -48,15 +58,15 @@ public class BindingFactory {
         return binding;
     }
 
-    public static Binding createBindingForDirectExchange(Queue amqQueue, DirectExchange amqExchange, String routingKey) {
+    private static Binding createBindingForDirectExchange(Queue amqQueue, DirectExchange amqExchange, String routingKey) {
         return BindingBuilder.bind(amqQueue).to(amqExchange).with(routingKey);
     }
 
-    public static Binding createBindingForTopicExchange(Queue amqQueue, TopicExchange amqExchange, String routingKey) {
+    private static Binding createBindingForTopicExchange(Queue amqQueue, TopicExchange amqExchange, String routingKey) {
         return BindingBuilder.bind(amqQueue).to(amqExchange).with(routingKey);
     }
 
-    public static Binding createBindingForFanoutExchange(Queue amqQueue, FanoutExchange amqExchange) {
+    private static Binding createBindingForFanoutExchange(Queue amqQueue, FanoutExchange amqExchange) {
         return BindingBuilder.bind(amqQueue).to(amqExchange);
     }
 

@@ -25,33 +25,33 @@ public class ConfigurationServiceImpl implements ConfigurationService {
     private ConfigurationDao configDAO;
 
     @Override
-    public List<HostDto> getHostConfig() {
+    public <T extends HostDto> List<T> getHostConfig() {
         return EywaBeanUtils.toDto(configDAO.findHostConfigs());
     }
 
     @Override
-    public List<SenderDto> getSenders() {
-        return EywaBeanUtils.toDto(configDAO.findSenders());
+    public <T extends SenderDto> List<T> getSenders(String key) {
+        return EywaBeanUtils.toDto(configDAO.findSenders(key));
     }
 
     @Override
-    public List<BindingDto> getBindings() {
-        return EywaBeanUtils.toDto(configDAO.findBindings());
+    public <T extends BindingDto> List<T> getBindings(String key) {
+        return EywaBeanUtils.toDto(configDAO.findBindings(key));
     }
 
     @Override
-    public List<QueueDto> getQueueDtos() {
-        return EywaBeanUtils.toDto(configDAO.findQueues());
+    public <T extends QueueDto> List<T> getQueueDtos(String key) {
+        return EywaBeanUtils.toDto(configDAO.findQueues(key));
     }
 
     @Override
-    public List<ExchangeDto> getExchanges() {
-        return EywaBeanUtils.toDto(configDAO.findExchanges());
+    public <T extends ExchangeDto>List<T> getExchanges(String key) {
+        return EywaBeanUtils.toDto(configDAO.findExchanges(key));
     }
 
     @Override
-    public <T extends ReceiverDto> List<T> getReceivers() {
-        return EywaBeanUtils.toDto(configDAO.findReceivers());
+    public <T extends ReceiverDto> List<T> getReceivers(String key) {
+        return EywaBeanUtils.toDto(configDAO.findReceivers(key));
     }
 
 }

@@ -12,9 +12,9 @@ public class HostBeanImpl extends ConfigBeanAbst implements HostBean {
 
     @Value("${amq.port:5672}")
     private int port;
-    @Value("${amq.username}")
+    @Value("${amq.username:guest}")
     private String username;
-    @Value("${amq.password}")
+    @Value("${amq.password:guest}")
     private String password;
 
     @Override

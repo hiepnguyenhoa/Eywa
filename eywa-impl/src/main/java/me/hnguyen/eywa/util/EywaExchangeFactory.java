@@ -2,6 +2,7 @@ package me.hnguyen.eywa.util;
 
 import me.hnguyen.eywa.amq.exception.CreateExchangeException;
 import me.hnguyen.eywa.config.bean.ExchangeBean;
+import org.apache.commons.lang3.Validate;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Exchange;
 import static org.springframework.amqp.core.ExchangeTypes.*;
@@ -12,24 +13,22 @@ import org.springframework.amqp.core.TopicExchange;
  *
  * @author hnguyen
  */
-public class ExchangeFactory {
+public class EywaExchangeFactory {
 
     private static final String EXCEPTION_MSG = "Unsupport the exchange type";
 
-    public static Exchange createExchange(ExchangeBean exchangeConf) {
-        if (exchangeConf == null) {
-            return null;
-        }
+    public static Exchange createExchange(ExchangeBean exchangeDto) {
+        Validate.notNull(exchangeDto);
         Exchange exchange = null;
-        switch (exchangeConf.getType()) {
+        switch (exchangeDto.getType()) {
             case DIRECT:
-                exchange = new DirectExchange(exchangeConf.getName());
+                exchange = new DirectExchange(exchangeDto.getName());
                 break;
             case TOPIC:
-                exchange = new TopicExchange(exchangeConf.getName());
+                exchange = new TopicExchange(exchangeDto.getName());
                 break;
             case FANOUT:
-                exchange = new FanoutExchange(exchangeConf.getName());
+                exchange = new FanoutExchange(exchangeDto.getName());
                 break;
             case HEADERS:
             case SYSTEM:

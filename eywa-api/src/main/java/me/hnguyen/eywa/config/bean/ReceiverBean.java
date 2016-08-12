@@ -5,9 +5,14 @@ import java.util.List;
 /**
  *
  * @author hnguyen
- * @param <Q>
+ * @param <H> HostBean
+ * @param <Q> QueueBean
  */
-public interface ReceiverBean<Q extends QueueBean> extends ConfigBean {
+public interface ReceiverBean<H extends HostBean, Q extends QueueBean> extends ConfigBean {
+    
+    public void setHost(H host);
+    
+    public H getHost();
 
     public void setQueues(List<QueueBean> queues);
 

@@ -6,9 +6,10 @@ import me.hnguyen.eywa.config.dto.SenderDto;
 /**
  *
  * @author hnguyen
- * @param <E>
+ * @param <H> HostEntity
+ * @param <E> ExchangeEntity
  */
-public interface SenderEntity<E extends ExchangeEntity>
-        extends SenderBean<E>, ConfigEntity<SenderDto> {
+public interface SenderEntity<H extends HostEntity, E extends ExchangeEntity>
+        extends SenderBean<H, E>, ConfigEntity<SenderDto> {
 
 }

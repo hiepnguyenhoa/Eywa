@@ -3,18 +3,42 @@ package me.hnguyen.eywa.config.bean;
 import java.util.Objects;
 import me.hnguyen.eywa.util.LambdaUtils;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  *
  * @author hnguyen
+ * @param <H>
  * @param <E>
  */
 @NodeEntity
-public class SenderBeanImpl< E extends ExchangeBean>
-        extends ConfigBeanAbst
-        implements SenderBean<E> {
+public class SenderBeanImpl<H extends HostBean, E extends ExchangeBean> extends ConfigBeanAbst implements SenderBean<H, E> {
 
+    @Value("${sender.routing}")
+    private String routing;
     private E exchange;
+
+    private H host;
+
+    @Override
+    public String getRouting() {
+        return routing;
+    }
+
+    @Override
+    public void setRouting(String routing) {
+        this.routing = routing;
+    }
+
+    @Override
+    public H getHost() {
+        return host;
+    }
+
+    @Override
+    public void setHost(H host) {
+        this.host = host;
+    }
 
     @Override
     public E getExchange() {

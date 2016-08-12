@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
  * @author hnguyen
  */
 @Component
-public class EywaReceiverTemplateImpl implements EywaReceiverTemplate {
+public class EywaReceiverConfigImpl implements EywaReceiverTemplate {
     
 }
