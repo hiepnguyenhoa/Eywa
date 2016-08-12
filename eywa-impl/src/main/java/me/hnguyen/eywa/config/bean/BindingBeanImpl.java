@@ -2,7 +2,6 @@ package me.hnguyen.eywa.config.bean;
 
 import java.util.Objects;
 import me.hnguyen.eywa.util.LambdaUtils;
-import org.neo4j.ogm.annotation.NodeEntity;
 import org.springframework.beans.factory.annotation.Value;
 
 /**
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Value;
  * @param <E>
  * @param <Q>
  */
-@NodeEntity
 public class BindingBeanImpl< E extends ExchangeBean, Q extends QueueBean>
         extends ConfigBeanAbst
         implements BindingBean<E, Q> {

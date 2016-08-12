@@ -1,7 +1,5 @@
 package me.hnguyen.eywa.config.bean;
 
-import java.util.List;
-
 /**
  *
  * @author hnguyen
@@ -9,19 +7,13 @@ import java.util.List;
  * @param <Q> QueueBean
  */
 public interface ReceiverBean<H extends HostBean, Q extends QueueBean> extends ConfigBean {
-    
+
     public void setHost(H host);
-    
+
     public H getHost();
 
-    public void setQueues(List<QueueBean> queues);
+    public QueueBean getQueue();
 
-    public List<QueueBean> getQueues();
-
-    public QueueBean getQueue(String name);
-
-    public void addQueue(QueueBean queue);
-
-    public QueueBean removeQueue(String name);
+    public void setQueue(Q queue);
 
 }

@@ -1,6 +1,5 @@
 package me.hnguyen.eywa.amq.service;
 
-import me.hnguyen.eywa.service.EywaSender;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 

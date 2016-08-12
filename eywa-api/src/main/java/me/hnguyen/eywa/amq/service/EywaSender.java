@@ -1,4 +1,4 @@
-package me.hnguyen.eywa.service;
+package me.hnguyen.eywa.amq.service;
 
 /**
  *

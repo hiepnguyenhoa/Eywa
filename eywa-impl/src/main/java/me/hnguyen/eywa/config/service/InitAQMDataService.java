@@ -24,7 +24,6 @@ public class InitAQMDataService {
     
     @Inject
     private ConfigurationDao configDao;
-    
     @Inject
     private HostEntity hostEntity;
     @Inject
@@ -33,13 +32,17 @@ public class InitAQMDataService {
     private QueueEntity queueEntity;
     @Inject
     private BindingEntity bindingEntity;
+    @Inject
+    private SenderEntity senderEntity;
+    @Inject
+    private ReceiverEntity receiverEntity;
     
     @Transactional
     public void initData(){
         configDao.save(hostEntity);
         
-        SenderEntity senderEntity = new SenderEntityImpl();
         senderEntity.setExchange(exchangeEntity);
+        senderEntity.setHost(hostEntity);
         configDao.save(senderEntity);
         
         List<BindingEntity> bindingEntities = new ArrayList<>();
@@ -48,8 +51,8 @@ public class InitAQMDataService {
         bindingEntities.add(bindingEntity);
         configDao.save(bindingEntities);
         
-        ReceiverEntity receiverEntity = new ReceiverEntityImpl();
-        receiverEntity.addQueue(queueEntity);
+        receiverEntity.setHost(hostEntity);
+        receiverEntity.setQueue(queueEntity);
         configDao.save(receiverEntity);
     }
 }

@@ -11,8 +11,9 @@ import me.hnguyen.eywa.config.bean.SenderBean;
 import me.hnguyen.eywa.config.dto.HostDto;
 import me.hnguyen.eywa.config.dto.SenderDto;
 import me.hnguyen.eywa.config.service.ConfigurationService;
-import me.hnguyen.eywa.service.EywaSender;
+import me.hnguyen.eywa.amq.service.EywaSender;
 import me.hnguyen.eywa.util.EywaBeanUtils;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -33,7 +34,7 @@ public class EywaSenderConfigImpl extends EywaAMQServerConfigImpl implements Eyw
     public void inititializeSenders() {
         List<HostDto> hostDtos = configService.getHostConfig();
         hostDtos.stream().forEach((hostDto) -> {
-            initializeSender(hostDto.getKey());
+            initializeSender(EywaBeanUtils.buildConfigBeanKey(hostDto));
         });
     }
     

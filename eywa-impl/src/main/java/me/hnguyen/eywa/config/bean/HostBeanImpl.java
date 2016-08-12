@@ -1,13 +1,11 @@
 package me.hnguyen.eywa.config.bean;
 
-import org.neo4j.ogm.annotation.NodeEntity;
 import org.springframework.beans.factory.annotation.Value;
 
 /**
  *
  * @author hnguyen
  */
-@NodeEntity
 public class HostBeanImpl extends ConfigBeanAbst implements HostBean {
 
     @Value("${amq.port:5672}")

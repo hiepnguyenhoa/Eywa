@@ -3,6 +3,8 @@ package me.hnguyen.eywa.config.entity;
 import me.hnguyen.eywa.config.bean.SenderBeanImpl;
 import me.hnguyen.eywa.config.dto.ExchangeDto;
 import me.hnguyen.eywa.config.dto.ExchangeDtoImpl;
+import me.hnguyen.eywa.config.dto.HostDto;
+import me.hnguyen.eywa.config.dto.HostDtoImpl;
 import me.hnguyen.eywa.config.dto.SenderDtoImpl;
 import me.hnguyen.eywa.util.EywaBeanUtils;
 import org.neo4j.ogm.annotation.NodeEntity;
@@ -21,11 +23,20 @@ public class SenderEntityImpl
     
     @Override
     public SenderDto toDto() {
-        SenderDto senderChannelDto = new SenderDtoImpl();
+        SenderDto senderDto = new SenderDtoImpl();
+        senderDto.setKey(this.getKey());
+        senderDto.setName(this.getName());
+        senderDto.setRouting(this.getRouting());
+        
         ExchangeDto exchangeDto = new ExchangeDtoImpl();
         exchangeDto = (ExchangeDto) EywaBeanUtils.copyProperties(this.getExchange(), exchangeDto);
-        senderChannelDto.setExchange(exchangeDto);
-        return senderChannelDto;
+        senderDto.setExchange(exchangeDto);
+        
+        HostDto hostDto = new HostDtoImpl();
+        hostDto = (HostDto) EywaBeanUtils.copyProperties(this.getHost(), hostDto);
+        senderDto.setHost(hostDto);
+        
+        return senderDto;
     }
 
 }

@@ -1,14 +1,12 @@
 package me.hnguyen.eywa.config.bean;
 
 import java.util.Objects;
-import org.neo4j.ogm.annotation.NodeEntity;
 import org.springframework.beans.factory.annotation.Value;
 
 /**
  *
  * @author hnguyen
  */
-@NodeEntity
 public class ExchangeBeanImpl extends ConfigBeanAbst implements ExchangeBean {
 
     @Value("${exchange.type}")

@@ -1,13 +1,11 @@
 package me.hnguyen.eywa.config.bean;
 
-import org.neo4j.ogm.annotation.NodeEntity;
 import org.springframework.beans.factory.annotation.Value;
 
 /**
  *
  * @author hnguyen
  */
-@NodeEntity
 public class QueueBeanImpl extends ConfigBeanAbst implements QueueBean {
 
     @Value("${queue.durable}")

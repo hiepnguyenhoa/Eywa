@@ -2,7 +2,6 @@ package me.hnguyen.eywa.config.bean;
 
 import java.util.Objects;
 import me.hnguyen.eywa.util.LambdaUtils;
-import org.neo4j.ogm.annotation.NodeEntity;
 import org.springframework.beans.factory.annotation.Value;
 
 /**
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Value;
  * @param <H>
  * @param <E>
  */
-@NodeEntity
 public class SenderBeanImpl<H extends HostBean, E extends ExchangeBean> extends ConfigBeanAbst implements SenderBean<H, E> {
 
     @Value("${sender.routing}")

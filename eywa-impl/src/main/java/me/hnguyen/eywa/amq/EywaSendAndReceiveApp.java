@@ -2,28 +2,25 @@ package me.hnguyen.eywa.amq;
 
 import java.util.List;
 import javax.inject.Inject;
+import me.hnguyen.eywa.amq.rabbitmq.EywaSendAndReceiveConfig;
 import me.hnguyen.eywa.amq.rabbitmq.EywaSenderConfigImpl;
 import me.hnguyen.eywa.amq.service.EywaSender;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
 /**
  *
  * @author hnguyen
  */
-@Component
-@EnableScheduling
-public class EywaSenderApp {
+public class EywaSendAndReceiveApp {
 
     @Inject
     EywaSenderConfigImpl eywaSenderConfig;
 
     public static void main(String[] args) {
         AnnotationConfigApplicationContext ctx
-                = new AnnotationConfigApplicationContext(EywaSenderConfigImpl.class);
-        EywaSenderApp app = ctx.getBean(EywaSenderApp.class);
+                = new AnnotationConfigApplicationContext(EywaSendAndReceiveConfig.class);
+        EywaSendAndReceiveApp app = ctx.getBean(EywaSendAndReceiveApp.class);
         app.sendMessage();
     }
 
@@ -32,9 +29,7 @@ public class EywaSenderApp {
     @Scheduled(fixedDelay = 2000)
     private void sendMessage() {
         List<EywaSender> senders = eywaSenderConfig.getEywaSenders();
-        senders.stream().forEach((sender) -> {
-            sender.send(Thread.currentThread().getName() + " -- this is a message" + ++count);
-        System.out.println("[-] "+Thread.currentThread().getName() +" Send message " + count);});
+        senders.stream().forEach((sender) -> sender.send( " -- this is a message " + ++count));
     }
-
+    
 }

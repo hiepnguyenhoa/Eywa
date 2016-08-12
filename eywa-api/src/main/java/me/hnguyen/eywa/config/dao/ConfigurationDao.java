@@ -23,7 +23,7 @@ public interface ConfigurationDao<T extends ConfigEntity> extends EywaDao<T> {
     @Query("MATCH (n:Host) return n")
     public <T extends HostEntity> List<T> findHostConfigs();
 
-    @Query("MATCH p=()-[r:EXCHANGE]->() RETURN p")
+    @Query("MATCH p=(:Sender)-[]->() RETURN p")
     public <T extends SenderEntity> List<T> findSenders(String key);
 
     @Query("MATCH (n:Exchange) RETURN n")

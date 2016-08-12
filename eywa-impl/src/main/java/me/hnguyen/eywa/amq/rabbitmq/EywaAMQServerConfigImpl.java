@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import me.hnguyen.eywa.amq.RabbitConfig;
 import me.hnguyen.eywa.config.dto.BindingDto;
 import me.hnguyen.eywa.config.dto.ExchangeDto;
 import me.hnguyen.eywa.config.dto.HostDto;
@@ -25,6 +26,8 @@ import me.hnguyen.eywa.util.EywaBindingFactory;
 import me.hnguyen.eywa.util.EywaConnectionFactory;
 import me.hnguyen.eywa.util.EywaQueueFactory;
 import org.springframework.amqp.core.AmqpAdmin;
+import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -32,7 +35,7 @@ import org.springframework.context.annotation.Configuration;
  * @author hnguyen
  */
 @Configuration
-public class EywaAMQServerConfigImpl implements EywaAMQServerConfig {
+public class EywaAMQServerConfigImpl extends RabbitConfig implements EywaAMQServerConfig {
 
     @Inject
     private InitAQMDataService initAQMDataService;
@@ -48,6 +51,13 @@ public class EywaAMQServerConfigImpl implements EywaAMQServerConfig {
     public void initialize() {
         inittializeDataIfAny();
         buildConnectionFactories();
+    }
+    
+    @Bean(name = "rabbitListenerContainerFactory")
+    public SimpleRabbitListenerContainerFactory listenerFactory() {
+        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+        factory.setConnectionFactory(this.getConnectionFactory("localhost_localhost"));
+        return factory;
     }
 
     public MessageConverter getMessageConverter() {

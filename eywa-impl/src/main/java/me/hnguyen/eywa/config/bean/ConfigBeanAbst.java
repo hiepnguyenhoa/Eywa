@@ -3,14 +3,12 @@ package me.hnguyen.eywa.config.bean;
 import java.util.Objects;
 import me.hnguyen.eywa.BaseBeanAbst;
 import me.hnguyen.eywa.util.LambdaUtils;
-import org.neo4j.ogm.annotation.NodeEntity;
 import org.springframework.beans.factory.annotation.Value;
 
 /**
  *
  * @author hnguyen
  */
-@NodeEntity
 public abstract class ConfigBeanAbst extends BaseBeanAbst implements ConfigBean {
 
     @Value("${config.key}")
