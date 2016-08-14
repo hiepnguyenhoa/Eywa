@@ -18,4 +18,6 @@ public interface ConfigBean extends BaseBean {
     public String getName();
 
     public void setName(String name);
+    
+    public String getKeyMap();
 }

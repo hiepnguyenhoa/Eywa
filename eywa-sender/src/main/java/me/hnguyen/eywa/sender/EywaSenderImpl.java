@@ -1,5 +1,6 @@
-package me.hnguyen.eywa.amq.service;
+package me.hnguyen.eywa.sender;
 
+import me.hnguyen.eywa.amq.service.EywaSender;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
@@ -27,4 +28,5 @@ public class EywaSenderImpl implements EywaSender {
     public void send(Object message) {
             this.rabbitTemplate.convertAndSend(message);
     }
+    
 }

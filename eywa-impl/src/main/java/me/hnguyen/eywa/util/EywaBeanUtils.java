@@ -31,11 +31,5 @@ public class EywaBeanUtils {
         BeanUtils.copyProperties(source, target);
         return target;
     }
-    
-    public static String buildConfigBeanKey(ConfigBean configBean) {
-        StringBuilder key = new StringBuilder();
-        key.append(configBean.getKey()).append("_").append(configBean.getName());
-        return key.toString();
-    }
 
 }

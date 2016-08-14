@@ -44,5 +44,10 @@ public class HostBeanImpl extends ConfigBeanAbst implements HostBean {
     public void setPassword(String password) {
         this.password = password;
     }
+    
+    @Override
+    public String getKeyMap() {
+        return this.getKey();
+    }
 
 }

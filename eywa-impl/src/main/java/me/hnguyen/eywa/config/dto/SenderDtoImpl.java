@@ -8,8 +8,8 @@ import me.hnguyen.eywa.config.entity.SenderEntity;
  * @author hnguyen
  */
 public class SenderDtoImpl
-        extends SenderBeanImpl<HostDto, ExchangeDto>
-        implements SenderDto<HostDto, ExchangeDto> {
+        extends SenderBeanImpl<ExchangeDto>
+        implements SenderDto<ExchangeDto> {
 
     @Override
     public SenderEntity toEntity() {

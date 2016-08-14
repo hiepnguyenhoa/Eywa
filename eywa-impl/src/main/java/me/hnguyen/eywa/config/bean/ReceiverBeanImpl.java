@@ -3,24 +3,11 @@ package me.hnguyen.eywa.config.bean;
 /**
  *
  * @author hnguyen
- * @param <H> HostBean
  * @param <T> QueueBean
  */
-public class ReceiverBeanImpl<H extends HostBean, T extends QueueBean> extends ConfigBeanAbst implements ReceiverBean<H, T> {
+public class ReceiverBeanImpl<T extends QueueBean> extends ConfigBeanAbst implements ReceiverBean<T> {
 
     private T queue;
-
-    private H host;
-
-    @Override
-    public H getHost() {
-        return host;
-    }
-
-    @Override
-    public void setHost(H host) {
-        this.host = host;
-    }
 
     @Override
     public T getQueue() {
@@ -30,6 +17,13 @@ public class ReceiverBeanImpl<H extends HostBean, T extends QueueBean> extends C
     @Override
     public void setQueue(T queue) {
         this.queue = queue;
+    }
+
+    @Override
+    public String getKeyMap() {
+        StringBuilder keyMap = new StringBuilder();
+        keyMap.append(this.getKey()).append("_").append(this.getName());
+        return keyMap.toString();
     }
 
 }

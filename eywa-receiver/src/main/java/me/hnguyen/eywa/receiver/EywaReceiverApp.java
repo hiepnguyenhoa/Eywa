@@ -1,6 +1,6 @@
-package me.hnguyen.eywa.amq;
+package me.hnguyen.eywa.receiver;
 
-import me.hnguyen.eywa.amq.rabbitmq.EywaReceiverConfigImpl;
+import me.hnguyen.eywa.receiver.EywaReceiverConfigImpl;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**

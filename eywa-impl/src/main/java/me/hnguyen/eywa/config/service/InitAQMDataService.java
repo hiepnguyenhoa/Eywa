@@ -42,7 +42,6 @@ public class InitAQMDataService {
         configDao.save(hostEntity);
         
         senderEntity.setExchange(exchangeEntity);
-        senderEntity.setHost(hostEntity);
         configDao.save(senderEntity);
         
         List<BindingEntity> bindingEntities = new ArrayList<>();
@@ -51,7 +50,6 @@ public class InitAQMDataService {
         bindingEntities.add(bindingEntity);
         configDao.save(bindingEntities);
         
-        receiverEntity.setHost(hostEntity);
         receiverEntity.setQueue(queueEntity);
         configDao.save(receiverEntity);
     }

@@ -7,16 +7,13 @@ import org.springframework.beans.factory.annotation.Value;
 /**
  *
  * @author hnguyen
- * @param <H>
  * @param <E>
  */
-public class SenderBeanImpl<H extends HostBean, E extends ExchangeBean> extends ConfigBeanAbst implements SenderBean<H, E> {
+public class SenderBeanImpl<E extends ExchangeBean> extends ConfigBeanAbst implements SenderBean<E> {
 
     @Value("${sender.routing}")
     private String routing;
     private E exchange;
-
-    private H host;
 
     @Override
     public String getRouting() {
@@ -26,16 +23,6 @@ public class SenderBeanImpl<H extends HostBean, E extends ExchangeBean> extends 
     @Override
     public void setRouting(String routing) {
         this.routing = routing;
-    }
-
-    @Override
-    public H getHost() {
-        return host;
-    }
-
-    @Override
-    public void setHost(H host) {
-        this.host = host;
     }
 
     @Override
@@ -65,6 +52,13 @@ public class SenderBeanImpl<H extends HostBean, E extends ExchangeBean> extends 
         int hash = 3;
         hash = 43 * hash + Objects.hashCode(this.key);
         return hash;
+    }
+    
+    @Override
+    public String getKeyMap() {
+        StringBuilder keyMap = new StringBuilder();
+        keyMap.append(this.getKey()).append("_").append(this.getName());
+        return keyMap.toString();
     }
 
 }

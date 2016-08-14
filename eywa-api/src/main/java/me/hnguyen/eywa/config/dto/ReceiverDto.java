@@ -6,10 +6,9 @@ import me.hnguyen.eywa.config.entity.ReceiverEntity;
 /**
  *
  * @author hnguyen
- * @param <H> HostDto
  * @param <B> QueueDto
  */
-public interface ReceiverDto<H extends  HostDto, B extends QueueDto> 
-        extends ReceiverBean<H, B>, ConfigDto<ReceiverEntity> {
+public interface ReceiverDto<B extends QueueDto> 
+        extends ReceiverBean<B>, ConfigDto<ReceiverEntity> {
     
 }

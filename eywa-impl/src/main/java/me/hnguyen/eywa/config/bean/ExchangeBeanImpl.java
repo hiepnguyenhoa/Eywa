@@ -40,5 +40,12 @@ public class ExchangeBeanImpl extends ConfigBeanAbst implements ExchangeBean {
         hash = 97 * hash + Objects.hashCode(this.getName());
         return hash;
     }
+    
+    @Override
+    public String getKeyMap() {
+        StringBuilder keyMap = new StringBuilder();
+        keyMap.append(this.getKey()).append("_").append(this.getName());
+        return keyMap.toString();
+    }
 
 }

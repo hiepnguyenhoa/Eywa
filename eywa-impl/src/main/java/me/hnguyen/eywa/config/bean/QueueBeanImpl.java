@@ -45,4 +45,10 @@ public class QueueBeanImpl extends ConfigBeanAbst implements QueueBean {
         this.autoDelete = autoDelete;
     }
 
+    @Override
+    public String getKeyMap() {
+        StringBuilder keyMap = new StringBuilder();
+        keyMap.append(this.getKey()).append("_").append(this.getName());
+        return keyMap.toString();
+    }
 }

@@ -6,12 +6,11 @@ import me.hnguyen.eywa.config.entity.ReceiverEntity;
 /**
  *
  * @author hnguyen
- * @param <H> HostDto
  * @param <T> QueueDto
  */
-public class ReceiverDtoImpl<H extends HostDto, T extends QueueDto>
-        extends ReceiverBeanImpl<H, T>
-        implements ReceiverDto<H, T> {
+public class ReceiverDtoImpl<T extends QueueDto>
+        extends ReceiverBeanImpl<T>
+        implements ReceiverDto<T> {
 
     @Override
     public ReceiverEntity toEntity() {

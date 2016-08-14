@@ -18,8 +18,8 @@ import org.springframework.stereotype.Component;
 @Component
 @NodeEntity(label = "Sender")
 public class SenderEntityImpl
-        extends SenderBeanImpl<HostEntity, ExchangeEntity>
-        implements SenderEntity<HostEntity, ExchangeEntity> {
+        extends SenderBeanImpl<ExchangeEntity>
+        implements SenderEntity<ExchangeEntity> {
     
     @Override
     public SenderDto toDto() {
@@ -31,10 +31,6 @@ public class SenderEntityImpl
         ExchangeDto exchangeDto = new ExchangeDtoImpl();
         exchangeDto = (ExchangeDto) EywaBeanUtils.copyProperties(this.getExchange(), exchangeDto);
         senderDto.setExchange(exchangeDto);
-        
-        HostDto hostDto = new HostDtoImpl();
-        hostDto = (HostDto) EywaBeanUtils.copyProperties(this.getHost(), hostDto);
-        senderDto.setHost(hostDto);
         
         return senderDto;
     }

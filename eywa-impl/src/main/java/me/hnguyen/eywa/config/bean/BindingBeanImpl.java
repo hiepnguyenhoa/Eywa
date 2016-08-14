@@ -73,5 +73,12 @@ public class BindingBeanImpl< E extends ExchangeBean, Q extends QueueBean>
         hash = 37 * hash + Objects.hashCode(this.routingKey);
         return hash;
     }
+    
+    @Override
+    public String getKeyMap() {
+        StringBuilder keyMap = new StringBuilder();
+        keyMap.append(this.getKey()).append("_").append(this.getName());
+        return keyMap.toString();
+    }
 
 }
