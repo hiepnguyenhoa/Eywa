@@ -3,19 +3,15 @@ package me.hnguyen.eywa.config.entity;
 import me.hnguyen.eywa.config.bean.SenderBeanImpl;
 import me.hnguyen.eywa.config.dto.ExchangeDto;
 import me.hnguyen.eywa.config.dto.ExchangeDtoImpl;
-import me.hnguyen.eywa.config.dto.HostDto;
-import me.hnguyen.eywa.config.dto.HostDtoImpl;
 import me.hnguyen.eywa.config.dto.SenderDtoImpl;
 import me.hnguyen.eywa.util.EywaBeanUtils;
 import org.neo4j.ogm.annotation.NodeEntity;
 import me.hnguyen.eywa.config.dto.SenderDto;
-import org.springframework.stereotype.Component;
 
 /**
  *
  * @author hnguyen
  */
-@Component
 @NodeEntity(label = "Sender")
 public class SenderEntityImpl
         extends SenderBeanImpl<ExchangeEntity>

@@ -30,7 +30,7 @@ public class EywaBindingFactory {
         return createBinding(
                 EywaQueueFactory.createQueue(bindingDto.getQueue()),
                 EywaExchangeFactory.createExchange(bindingDto.getExchange()),
-                bindingDto.getRoutingKey()
+                bindingDto.getRouting()
         );
     }
 

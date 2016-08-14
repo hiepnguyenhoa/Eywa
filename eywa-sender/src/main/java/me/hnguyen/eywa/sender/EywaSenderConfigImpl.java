@@ -12,7 +12,6 @@ import me.hnguyen.eywa.config.dto.HostDto;
 import me.hnguyen.eywa.config.dto.SenderDto;
 import me.hnguyen.eywa.config.service.ConfigurationService;
 import me.hnguyen.eywa.amq.service.EywaSender;
-import me.hnguyen.eywa.util.EywaBeanUtils;
 import org.springframework.context.annotation.Configuration;
 
 /**

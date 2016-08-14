@@ -15,7 +15,6 @@ import me.hnguyen.eywa.config.dto.HostDto;
 import me.hnguyen.eywa.config.dto.QueueDto;
 import me.hnguyen.eywa.config.service.ConfigurationService;
 import me.hnguyen.eywa.config.service.InitAQMDataService;
-import me.hnguyen.eywa.util.EywaBeanUtils;
 import me.hnguyen.eywa.util.EywaBindingFactory;
 import me.hnguyen.eywa.util.EywaExchangeFactory;
 import me.hnguyen.eywa.util.EywaQueueFactory;
@@ -33,6 +32,7 @@ import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
@@ -44,8 +44,9 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 @Configuration
 @EnableRabbit
 @ComponentScan(basePackages = {"me.hnguyen.eywa"})
+@ImportResource(value = {"classpath:eywa_config.xml"})
 @PropertySources({
-    @PropertySource("classpath:/yewa_rabbit_init.properties")})
+    @PropertySource("classpath:/eywa_config.properties")})
 public class RabbitConfig extends Neo4JContext {
 
     @Inject

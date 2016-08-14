@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
  * @author hnguyen
  * @param <T>
  */
-@Component
 @NodeEntity(label = "Receiver")
 public class ReceiverEntityImpl<T extends QueueEntity>
         extends ReceiverBeanImpl<T>

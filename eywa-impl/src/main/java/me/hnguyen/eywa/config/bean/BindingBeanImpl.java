@@ -2,7 +2,6 @@ package me.hnguyen.eywa.config.bean;
 
 import java.util.Objects;
 import me.hnguyen.eywa.util.LambdaUtils;
-import org.springframework.beans.factory.annotation.Value;
 
 /**
  *
@@ -15,11 +14,8 @@ public class BindingBeanImpl< E extends ExchangeBean, Q extends QueueBean>
         implements BindingBean<E, Q> {
 
     private E exchange;
-
     private Q queue;
-
-    @Value("${binding.routingKey}")
-    private String routingKey;
+    private String routing;
 
     @Override
     public E getExchange() {
@@ -42,13 +38,13 @@ public class BindingBeanImpl< E extends ExchangeBean, Q extends QueueBean>
     }
 
     @Override
-    public String getRoutingKey() {
-        return routingKey;
+    public String getRouting() {
+        return routing;
     }
 
     @Override
-    public void setRoutingKey(String routingKey) {
-        this.routingKey = routingKey;
+    public void setRouting(String routingKey) {
+        this.routing = routingKey;
     }
 
     @Override
@@ -62,7 +58,7 @@ public class BindingBeanImpl< E extends ExchangeBean, Q extends QueueBean>
         BindingBeanImpl binding = (BindingBeanImpl) obj;
         return LambdaUtils.compare_object.apply(this.exchange, binding.exchange)
                 || LambdaUtils.compare_object.apply(this.queue, binding.queue)
-                || LambdaUtils.compare_object.apply(this.routingKey, binding.routingKey);
+                || LambdaUtils.compare_object.apply(this.routing, binding.routing);
     }
 
     @Override
@@ -70,7 +66,7 @@ public class BindingBeanImpl< E extends ExchangeBean, Q extends QueueBean>
         int hash = 5;
         hash = 37 * hash + Objects.hashCode(this.exchange);
         hash = 37 * hash + Objects.hashCode(this.queue);
-        hash = 37 * hash + Objects.hashCode(this.routingKey);
+        hash = 37 * hash + Objects.hashCode(this.routing);
         return hash;
     }
     

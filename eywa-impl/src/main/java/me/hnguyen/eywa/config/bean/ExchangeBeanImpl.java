@@ -1,16 +1,16 @@
 package me.hnguyen.eywa.config.bean;
 
-import java.util.Objects;
-import org.springframework.beans.factory.annotation.Value;
-
 /**
  *
  * @author hnguyen
  */
 public class ExchangeBeanImpl extends ConfigBeanAbst implements ExchangeBean {
 
-    @Value("${exchange.type}")
     private String type;
+    private boolean autoDelete;
+    private boolean delay;
+    private boolean durable;
+    private boolean internal;
 
     @Override
     public void setType(String type) {
@@ -23,22 +23,43 @@ public class ExchangeBeanImpl extends ConfigBeanAbst implements ExchangeBean {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (!(obj instanceof ExchangeBeanImpl)) {
-            return false;
-        }
-        ExchangeBeanImpl tmp = (ExchangeBeanImpl) obj;
-        return this.getName().endsWith(tmp.getName());
+    public boolean isAutoDelete() {
+        return autoDelete;
     }
 
     @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.getName());
-        return hash;
+    public void setAutoDelete(boolean autoDelete) {
+        this.autoDelete = autoDelete;
+    }
+
+    @Override
+    public boolean isDelay() {
+        return delay;
+    }
+
+    @Override
+    public void setDelay(boolean delay) {
+        this.delay = delay;
+    }
+
+    @Override
+    public boolean isDurable() {
+        return durable;
+    }
+
+    @Override
+    public void setDurable(boolean durable) {
+        this.durable = durable;
+    }
+
+    @Override
+    public boolean isInternal() {
+        return internal;
+    }
+
+    @Override
+    public void setInternal(boolean internal) {
+        this.internal = internal;
     }
     
     @Override

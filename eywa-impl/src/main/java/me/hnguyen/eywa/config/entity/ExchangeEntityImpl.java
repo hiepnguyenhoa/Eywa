@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
  *
  * @author hnguyen
  */
-@Component
 @NodeEntity(label = "Exchange")
 public class ExchangeEntityImpl extends ExchangeBeanImpl implements ExchangeEntity {
 

@@ -3,7 +3,6 @@ package me.hnguyen.eywa.config.bean;
 import java.util.Objects;
 import me.hnguyen.eywa.BaseBeanAbst;
 import me.hnguyen.eywa.util.LambdaUtils;
-import org.springframework.beans.factory.annotation.Value;
 
 /**
  *
@@ -11,9 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
  */
 public abstract class ConfigBeanAbst extends BaseBeanAbst implements ConfigBean {
 
-    @Value("${config.key}")
     protected String key;
-    @Value("${config.name}")
     protected String name;
 
     @Override

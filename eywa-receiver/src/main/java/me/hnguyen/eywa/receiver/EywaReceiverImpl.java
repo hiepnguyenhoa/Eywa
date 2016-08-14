@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class EywaReceiverImpl implements EywaReceiver<String> {
 
     @Override
-    @RabbitListener(queues = {"localhost"})
+    @RabbitListener(queues = {"eywa.direct"})
     public void process(String message) {
         System.out.println("[x] "+Thread.currentThread().getName()+" Received message " + message);
     }

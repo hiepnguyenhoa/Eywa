@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
  * @param <E>
  * @param <Q>
  */
-@Component
 @NodeEntity(label = "Binding")
 public class BindingEntityImpl<E extends ExchangeEntity, Q extends QueueEntity>
         extends BindingBeanImpl<E, Q>
@@ -24,7 +23,7 @@ public class BindingEntityImpl<E extends ExchangeEntity, Q extends QueueEntity>
         bindingDto.setId(this.getId());
         bindingDto.setKey(this.getKey());
         bindingDto.setName(this.getName());
-        bindingDto.setRoutingKey(this.getRoutingKey());
+        bindingDto.setRouting(this.getRouting());
         if (this.getExchange() != null) {
             bindingDto.setExchange(this.getExchange().toDto());
         }

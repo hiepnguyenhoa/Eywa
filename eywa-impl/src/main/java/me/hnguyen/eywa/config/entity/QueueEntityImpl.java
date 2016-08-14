@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
  *
  * @author hnguyen
  */
-@Component
 @NodeEntity(label = "Queue")
 public class QueueEntityImpl extends QueueBeanImpl implements QueueEntity {
 

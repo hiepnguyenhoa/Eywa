@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
  *
  * @author hnguyen
  */
-@Component
 @NodeEntity(label = "Host")
 public class HostEntityImpl extends HostBeanImpl implements HostEntity {
 

@@ -1,18 +1,13 @@
 package me.hnguyen.eywa.config.bean;
 
-import org.springframework.beans.factory.annotation.Value;
-
 /**
  *
  * @author hnguyen
  */
 public class QueueBeanImpl extends ConfigBeanAbst implements QueueBean {
 
-    @Value("${queue.durable}")
     private boolean durable;
-    @Value("${queue.exclusive}")
     private boolean exclusive;
-    @Value("${queue.autoDelete}")
     private boolean autoDelete;
 
     @Override

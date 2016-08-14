@@ -2,7 +2,6 @@ package me.hnguyen.eywa.config.bean;
 
 import java.util.Objects;
 import me.hnguyen.eywa.util.LambdaUtils;
-import org.springframework.beans.factory.annotation.Value;
 
 /**
  *
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Value;
  */
 public class SenderBeanImpl<E extends ExchangeBean> extends ConfigBeanAbst implements SenderBean<E> {
 
-    @Value("${sender.routing}")
     private String routing;
     private E exchange;
 
@@ -53,7 +51,7 @@ public class SenderBeanImpl<E extends ExchangeBean> extends ConfigBeanAbst imple
         hash = 43 * hash + Objects.hashCode(this.key);
         return hash;
     }
-    
+
     @Override
     public String getKeyMap() {
         StringBuilder keyMap = new StringBuilder();
