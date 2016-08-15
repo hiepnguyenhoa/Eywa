@@ -28,12 +28,13 @@ public class EywaSenderApp {
 
     int count = 0;
 
-    @Scheduled(fixedDelay = 2000)
+    @Scheduled(fixedDelay = 500)
     private void sendMessage() {
         List<EywaSender> senders = eywaSenderConfig.getEywaSenders();
         senders.stream().forEach((sender) -> {
-            sender.send(Thread.currentThread().getName() + " -- this is a message" + ++count);
-        System.out.println("[-] "+Thread.currentThread().getName() +" Send message " + count);});
+            sender.send(Thread.currentThread().getName() + " message" + ++count);
+            System.out.println("[-] " + Thread.currentThread().getName() + " Send message " + count);
+        });
     }
 
 }

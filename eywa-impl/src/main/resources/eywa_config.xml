@@ -23,6 +23,7 @@
         <property name="key" value="${config.key}"/>
         <property name="name" value="${receiver.name}"/>
         <property name="queue" ref="queue"/>
+        <property name="messageProcessor" ref="messageProcessor"/>
     </bean>
     
     <bean id="sender" class="me.hnguyen.eywa.config.entity.SenderEntityImpl">
@@ -57,11 +58,8 @@
         <property name="exclusive" value="${queue.exclusive}"/>
         <property name="autoDelete" value="${queue.autoDelete}"/>
     </bean>
-    <!--
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location">
-            <value>eywa_config.properties</value>
-        </property>
+    
+    <bean id="messageProcessor" class="me.hnguyen.eywa.amq.processor.PrintOutMessageProcessor">
+        <property name="converterName" value="msgConverter"/>
     </bean>
-    -->
 </beans>

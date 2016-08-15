@@ -8,27 +8,42 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import me.hnguyen.eywa.Neo4JContext;
+import me.hnguyen.eywa.amq.exception.CreateBindingException;
+import me.hnguyen.eywa.amq.exception.CreateExchangeException;
+import me.hnguyen.eywa.config.bean.BindingBean;
+import me.hnguyen.eywa.config.bean.ExchangeBean;
 import me.hnguyen.eywa.config.bean.HostBean;
+import me.hnguyen.eywa.config.bean.QueueBean;
 import me.hnguyen.eywa.config.dto.BindingDto;
 import me.hnguyen.eywa.config.dto.ExchangeDto;
 import me.hnguyen.eywa.config.dto.HostDto;
 import me.hnguyen.eywa.config.dto.QueueDto;
 import me.hnguyen.eywa.config.service.ConfigurationService;
 import me.hnguyen.eywa.config.service.InitAQMDataService;
-import me.hnguyen.eywa.util.EywaBindingFactory;
-import me.hnguyen.eywa.util.EywaExchangeFactory;
-import me.hnguyen.eywa.util.EywaQueueFactory;
 import org.apache.commons.lang3.Validate;
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Exchange;
+import static org.springframework.amqp.core.ExchangeTypes.DELAYED;
+import static org.springframework.amqp.core.ExchangeTypes.DIRECT;
+import static org.springframework.amqp.core.ExchangeTypes.FANOUT;
+import static org.springframework.amqp.core.ExchangeTypes.HEADERS;
+import static org.springframework.amqp.core.ExchangeTypes.SYSTEM;
+import static org.springframework.amqp.core.ExchangeTypes.TOPIC;
+import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -47,7 +62,9 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 @ImportResource(value = {"classpath:eywa_config.xml"})
 @PropertySources({
     @PropertySource("classpath:/eywa_config.properties")})
-public class RabbitConfig extends Neo4JContext {
+public class RabbitConfig extends Neo4JContext implements ApplicationContextAware {
+    
+    protected ApplicationContext ac;
 
     @Inject
     private InitAQMDataService initAQMDataService;
@@ -69,7 +86,7 @@ public class RabbitConfig extends Neo4JContext {
         amqConnectionFactories.values().stream().forEach((connFact) -> connFact.destroy());
     }
 
-    @Bean
+    @Bean(name = "msgConverter")
     public MessageConverter getMessageConverter() {
         return this.msgConverter;
     }
@@ -93,9 +110,9 @@ public class RabbitConfig extends Neo4JContext {
         });
         return rabbitAdmins;
     }
-    
+
     @Bean
-    public List<ConnectionFactory> getConnectionFactories(){
+    public List<ConnectionFactory> getConnectionFactories() {
         return new ArrayList(amqConnectionFactories.values());
     }
 
@@ -145,6 +162,11 @@ public class RabbitConfig extends Neo4JContext {
         });
     }
 
+    @Override
+    public void setApplicationContext(ApplicationContext ac) throws BeansException {
+        this.ac=ac;
+    }
+
     static class EywaConnectionFactory {
 
         public static CachingConnectionFactory createConnectionFactory(HostBean hostDto) {
@@ -155,6 +177,90 @@ public class RabbitConfig extends Neo4JContext {
             connectionFactory.setUsername(hostDto.getUsername());
             connectionFactory.setPassword(hostDto.getPassword());
             return connectionFactory;
+        }
+    }
+
+    static class EywaBindingFactory {
+
+        public static Binding createBinding(BindingBean bindingDto) {
+            Validate.notNull(bindingDto);
+            return createBinding(
+                    EywaQueueFactory.createQueue(bindingDto.getQueue()),
+                    EywaExchangeFactory.createExchange(bindingDto.getExchange()),
+                    bindingDto.getRouting()
+            );
+        }
+
+        private static Binding createBinding(Queue amqQueue, Exchange amqExchange, String routingKey) {
+            Validate.notNull(amqQueue);
+            Validate.notNull(amqExchange);
+            Binding binding = null;
+            switch (amqExchange.getType()) {
+                case DIRECT:
+                    binding = createBindingForDirectExchange(amqQueue, (DirectExchange) amqExchange, routingKey);
+                    break;
+                case TOPIC:
+                    binding = createBindingForTopicExchange(amqQueue, (TopicExchange) amqExchange, routingKey);
+                    break;
+                case FANOUT:
+                    binding = createBindingForFanoutExchange(amqQueue, (FanoutExchange) amqExchange);
+                    break;
+                case HEADERS:
+                case SYSTEM:
+                case DELAYED:
+                default:
+                    throw new CreateBindingException();
+            }
+
+            return binding;
+        }
+
+        private static Binding createBindingForDirectExchange(Queue amqQueue, DirectExchange amqExchange, String routingKey) {
+            return BindingBuilder.bind(amqQueue).to(amqExchange).with(routingKey);
+        }
+
+        private static Binding createBindingForTopicExchange(Queue amqQueue, TopicExchange amqExchange, String routingKey) {
+            return BindingBuilder.bind(amqQueue).to(amqExchange).with(routingKey);
+        }
+
+        private static Binding createBindingForFanoutExchange(Queue amqQueue, FanoutExchange amqExchange) {
+            return BindingBuilder.bind(amqQueue).to(amqExchange);
+        }
+    }
+
+    static class EywaExchangeFactory {
+
+        private static final String EXCEPTION_MSG = "Unsupport the exchange type";
+
+        public static Exchange createExchange(ExchangeBean exchangeDto) {
+            Validate.notNull(exchangeDto);
+            Exchange exchange = null;
+            switch (exchangeDto.getType()) {
+                case DIRECT:
+                    exchange = new DirectExchange(exchangeDto.getName());
+                    break;
+                case TOPIC:
+                    exchange = new TopicExchange(exchangeDto.getName());
+                    break;
+                case FANOUT:
+                    exchange = new FanoutExchange(exchangeDto.getName());
+                    break;
+                case HEADERS:
+                case SYSTEM:
+                case DELAYED:
+                default:
+                    throw new CreateExchangeException(EXCEPTION_MSG);
+            }
+            return exchange;
+        }
+    }
+
+    static class EywaQueueFactory {
+
+        public static Queue createQueue(QueueBean queueDto) {
+            Validate.notNull(queueDto);
+            Queue queue = new Queue(queueDto.getName(), queueDto.isDurable(), queueDto.isExclusive(), queueDto.isAutoDelete());
+            return queue;
         }
     }
 

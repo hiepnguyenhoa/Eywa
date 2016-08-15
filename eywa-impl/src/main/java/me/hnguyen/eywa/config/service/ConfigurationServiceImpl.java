@@ -1,5 +1,6 @@
 package me.hnguyen.eywa.config.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import me.hnguyen.eywa.config.dao.ConfigurationDao;
@@ -11,6 +12,7 @@ import me.hnguyen.eywa.config.dto.ReceiverDto;
 import me.hnguyen.eywa.util.EywaBeanUtils;
 import org.springframework.stereotype.Component;
 import me.hnguyen.eywa.config.dto.SenderDto;
+import me.hnguyen.eywa.config.entity.ReceiverEntity;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -51,7 +53,13 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 
     @Override
     public <T extends ReceiverDto> List<T> getReceivers(String key) {
-        return EywaBeanUtils.toDto(configDAO.findReceivers(key));
+        List<ReceiverEntity> receiverEntities = configDAO.findReceivers(key);
+        List<T> receiverDtos = new ArrayList<>();
+        for(ReceiverEntity receiverEntity:receiverEntities){
+            T receiverDto = (T) receiverEntity.toDto();
+            receiverDtos.add(receiverDto);
+        }
+        return receiverDtos;
     }
 
 }
