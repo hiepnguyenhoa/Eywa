@@ -63,15 +63,13 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 @PropertySources({
     @PropertySource("classpath:/eywa_config.properties")})
 public class RabbitConfig extends Neo4JContext implements ApplicationContextAware {
-    
+
     protected ApplicationContext ac;
 
     @Inject
     private InitAQMDataService initAQMDataService;
     @Inject
     private ConfigurationService configService;
-
-    private final MessageConverter msgConverter = new Jackson2JsonMessageConverter();
 
     private final Map<String, CachingConnectionFactory> amqConnectionFactories = new HashMap<>();
 
@@ -88,7 +86,7 @@ public class RabbitConfig extends Neo4JContext implements ApplicationContextAwar
 
     @Bean(name = "msgConverter")
     public MessageConverter getMessageConverter() {
-        return this.msgConverter;
+        return new Jackson2JsonMessageConverter();
     }
 
     @Bean
@@ -164,7 +162,7 @@ public class RabbitConfig extends Neo4JContext implements ApplicationContextAwar
 
     @Override
     public void setApplicationContext(ApplicationContext ac) throws BeansException {
-        this.ac=ac;
+        this.ac = ac;
     }
 
     static class EywaConnectionFactory {

@@ -10,6 +10,10 @@ public abstract class BaseBeanAbst implements BaseBean{
     
     @GraphId
     protected Long id;
+    
+    public BaseBeanAbst(){
+        
+    }
 
     @Override
     public Long getId() {

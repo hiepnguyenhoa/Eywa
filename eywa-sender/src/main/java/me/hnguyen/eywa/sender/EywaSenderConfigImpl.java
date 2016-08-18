@@ -54,7 +54,7 @@ public class EywaSenderConfigImpl extends RabbitConfig {
         EywaSender createEywaSender(SenderBean senderDto){
             EywaSender eywaSender = new EywaSenderImpl(
                     getConnectionFactory(senderDto.getKey())
-                    , senderDto.getExchange().getName(), senderDto.getRouting());
+                    , senderDto.getExchange().getName(), senderDto.getRouting(), getMessageConverter());
             return eywaSender;
         }
     }
