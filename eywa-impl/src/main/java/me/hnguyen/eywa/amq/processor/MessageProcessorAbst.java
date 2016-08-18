@@ -1,5 +1,7 @@
-package me.hnguyen.eywa.amq.service;
+package me.hnguyen.eywa.amq.processor;
 
+import me.hnguyen.eywa.amq.service.MessageProcessor;
+import me.hnguyen.eywa.config.bean.ConfigBeanAbst;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.support.converter.MessageConverter;
 
@@ -8,21 +10,11 @@ import org.springframework.amqp.support.converter.MessageConverter;
  * @author hnguyen
  * @param <T>
  */
-public abstract class MessageProcessorAbst<T> implements MessageProcessor<T> {
-
-    private Long id;
+public abstract class MessageProcessorAbst<T> extends ConfigBeanAbst implements MessageProcessor<T> {
 
     protected String converterName;
     
     private MessageConverter messageConverter;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     @Override
     public void setConverterName(String converterName) {
@@ -34,15 +26,20 @@ public abstract class MessageProcessorAbst<T> implements MessageProcessor<T> {
         return this.converterName;
     }
     
+    @Override
     public void setMessageConverter(MessageConverter converter){
         this.messageConverter = converter;
     }
 
     @Override
     public void onMessage(Message msg) {
-//        T t = (T)this.messageConverter.fromMessage(msg);
-//        messageProcessing(t);
-        System.out.println("[X] receive " + msg);
+        T t = (T)this.messageConverter.fromMessage(msg);
+        messageProcessing(t);
+    }
+
+    @Override
+    public String getKeyMap() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

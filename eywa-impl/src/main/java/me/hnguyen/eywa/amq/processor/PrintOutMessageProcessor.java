@@ -1,17 +1,16 @@
 package me.hnguyen.eywa.amq.processor;
 
-import org.springframework.stereotype.Component;
-import me.hnguyen.eywa.amq.service.MessageProcessorAbst;
+import me.hnguyen.eywa.logging.dto.LoggingDto;
 
 /**
  *
  * @author hnguyen
  */
-public class PrintOutMessageProcessor extends MessageProcessorAbst<String> {
+public class PrintOutMessageProcessor extends MessageProcessorAbst<LoggingDto> {
 
     @Override
-    public void messageProcessing(String message) {
-        System.out.println("[x] Receive message " + message);
+    public void messageProcessing(LoggingDto message) {
+        System.out.println("[x] PrintOutMessageProcessor receives " + message.toString());
     }
-    
+
 }

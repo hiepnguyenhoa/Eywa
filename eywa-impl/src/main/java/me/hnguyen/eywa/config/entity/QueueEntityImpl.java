@@ -5,7 +5,6 @@ import me.hnguyen.eywa.config.dto.QueueDto;
 import me.hnguyen.eywa.config.dto.QueueDtoImpl;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.springframework.beans.BeanUtils;
-import org.springframework.stereotype.Component;
 
 /**
  *

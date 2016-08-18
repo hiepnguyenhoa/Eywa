@@ -23,7 +23,7 @@
         <property name="key" value="${config.key}"/>
         <property name="name" value="${receiver.name}"/>
         <property name="queue" ref="queue"/>
-        <property name="messageProcessor" ref="messageProcessor"/>
+        <property name="messageProcessor" ref="saveProcessor"/>
     </bean>
     
     <bean id="sender" class="me.hnguyen.eywa.config.entity.SenderEntityImpl">
@@ -59,7 +59,15 @@
         <property name="autoDelete" value="${queue.autoDelete}"/>
     </bean>
     
-    <bean id="messageProcessor" class="me.hnguyen.eywa.amq.processor.PrintOutMessageProcessor">
+    <bean id="printProcessor" class="me.hnguyen.eywa.amq.processor.PrintOutMessageProcessor">
+        <property name="key" value="${config.key}"/>
+        <property name="name" value="printProcessor"/>
+        <property name="converterName" value="msgConverter"/>
+    </bean>
+    
+    <bean id="saveProcessor" class="me.hnguyen.eywa.amq.processor.SaveNeo4JProcessor">
+        <property name="key" value="${config.key}"/>
+        <property name="name" value="saveProcessor"/>
         <property name="converterName" value="msgConverter"/>
     </bean>
 </beans>
