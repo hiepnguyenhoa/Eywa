@@ -6,13 +6,12 @@ import me.hnguyen.eywa.amq.service.MessageProcessor;
  *
  * @author hnguyen
  * @param <T> QueueBean
- * @param <M>
  */
-public class ReceiverBeanImpl<T extends QueueBean, M extends MessageProcessor>
-        extends ConfigBeanAbst implements ReceiverBean<T, M> {
+public class ReceiverBeanImpl<T extends QueueBean>
+        extends ConfigBeanAbst implements ReceiverBean<T> {
 
     private T queue;
-    private M messageProcessor;
+    private String messageProcessor;
 
     @Override
     public T getQueue() {
@@ -32,12 +31,12 @@ public class ReceiverBeanImpl<T extends QueueBean, M extends MessageProcessor>
     }
 
     @Override
-    public M getMessageProcessor() {
+    public String getMessageProcessor() {
         return messageProcessor;
     }
 
     @Override
-    public void setMessageProcessor(M MessageProcessor) {
+    public void setMessageProcessor(String MessageProcessor) {
         this.messageProcessor = MessageProcessor;
     }
 

@@ -10,12 +10,11 @@ import me.hnguyen.eywa.config.dto.ReceiverDto;
  *
  * @author hnguyen
  * @param <T>
- * @param <M>
  */
 @NodeEntity(label = "Receiver")
-public class ReceiverEntityImpl<T extends QueueEntity,  M extends MessageProcessor>
-        extends ReceiverBeanImpl<T, M>
-        implements ReceiverEntity<T, M> {
+public class ReceiverEntityImpl<T extends QueueEntity>
+        extends ReceiverBeanImpl<T>
+        implements ReceiverEntity<T> {
 
     /**
      * The method was implemented weirdly because of NEO4J bug with Collection of Generic.

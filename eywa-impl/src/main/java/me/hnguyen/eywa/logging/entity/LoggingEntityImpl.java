@@ -4,11 +4,13 @@ import java.util.Date;
 import me.hnguyen.eywa.logging.bean.LoggingBeanImpl;
 import me.hnguyen.eywa.logging.dto.LoggingDto;
 import me.hnguyen.eywa.logging.dto.LoggingDtoImpl;
+import org.neo4j.ogm.annotation.NodeEntity;
 
 /**
  *
  * @author hnguyen
  */
+@NodeEntity(label = "Logging")
 public class LoggingEntityImpl extends LoggingBeanImpl implements LoggingEntity<LoggingDto> {
 
     public LoggingEntityImpl(Date date, String method, String message, String level) {

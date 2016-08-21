@@ -1,20 +1,19 @@
 package me.hnguyen.eywa.config.bean;
 
 /**
- *
- * @author hnguyen
  * @param <E> ExchangeBean
+ * @author hnguyen
  */
 public interface SenderBean<E extends ExchangeBean> extends ConfigBean {
 
-    public static final String PRODUCER_CHANNEL_NAME = "name";
+    String PRODUCER_CHANNEL_NAME = "name";
 
-    public void setExchange(E e);
+    void setExchange(E e);
 
-    public E getExchange();
+    E getExchange();
 
-    public String getRouting();
-    
-    public void setRouting(String routing);
+    String getRouting();
+
+    void setRouting(String routing);
 
 }

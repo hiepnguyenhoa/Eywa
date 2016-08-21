@@ -1,21 +1,23 @@
 package me.hnguyen.eywa.config.bean;
 
 /**
- *
- * @author hnguyen
  * @param <E> ExchangeConfig
  * @param <Q> QueueConfig
+ * @author hnguyen
  */
-public interface BindingBean<E extends ExchangeBean, Q extends QueueBean> extends ConfigBean{
-    
-    public static final String BINDING_RULE = "rule";
-    
-    public void setExchange(E exchange);
-    public E getExchange();
-    
-    public void setQueue(Q queue);
-    public Q getQueue();
-    
-    public String getRouting();
-    public void setRouting(String rule);
+public interface BindingBean<E extends ExchangeBean, Q extends QueueBean> extends ConfigBean {
+
+    String BINDING_RULE = "rule";
+
+    void setExchange(E exchange);
+
+    E getExchange();
+
+    void setQueue(Q queue);
+
+    Q getQueue();
+
+    String getRouting();
+
+    void setRouting(String rule);
 }

@@ -4,7 +4,6 @@ import me.hnguyen.eywa.config.bean.BindingBeanImpl;
 import me.hnguyen.eywa.config.dto.BindingDto;
 import me.hnguyen.eywa.config.dto.BindingDtoImpl;
 import org.neo4j.ogm.annotation.NodeEntity;
-import org.springframework.stereotype.Component;
 
 /**
  *

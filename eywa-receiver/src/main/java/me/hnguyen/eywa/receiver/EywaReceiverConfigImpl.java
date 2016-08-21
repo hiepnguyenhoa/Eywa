@@ -1,8 +1,6 @@
 package me.hnguyen.eywa.receiver;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.inject.Inject;
 import me.hnguyen.eywa.amq.rabbitmq.RabbitConfig;
 import me.hnguyen.eywa.amq.service.MessageProcessor;
@@ -15,9 +13,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListenerConfigurer;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerEndpoint;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.listener.RabbitListenerContainerFactory;
-import org.springframework.amqp.rabbit.listener.RabbitListenerEndpoint;
 import org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistrar;
-import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -56,7 +52,7 @@ public class EywaReceiverConfigImpl extends RabbitConfig implements RabbitListen
     }
 
     private MessageListener createMessageListener(ReceiverDto receiverDto, MessageConverter messageConverter) {
-        MessageProcessor messageListener = (MessageProcessor) this.ac.getBean(receiverDto.getMessageProcessor().getName());
+        MessageProcessor messageListener = (MessageProcessor) this.APP_CONTEXT.getBean(receiverDto.getMessageProcessor());
         messageListener.setMessageConverter(messageConverter);
         return messageListener;
     }

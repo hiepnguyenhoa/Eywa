@@ -3,21 +3,20 @@ package me.hnguyen.eywa.config.bean;
 import me.hnguyen.eywa.BaseBean;
 
 /**
- *
  * @author hnguyen
  */
 public interface ConfigBean extends BaseBean {
 
-    public static final String KEY = "key";
-    public static final String NAME = "name";
+    String KEY = "key";
+    String NAME = "name";
 
-    public String getKey();
+    String getKey();
 
-    public void setKey(String key);
+    void setKey(String key);
 
-    public String getName();
+    String getName();
 
-    public void setName(String name);
-    
-    public String getKeyMap();
+    void setName(String name);
+
+    String getKeyMap();
 }

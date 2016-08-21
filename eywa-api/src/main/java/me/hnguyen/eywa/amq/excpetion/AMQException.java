@@ -1,7 +1,6 @@
 package me.hnguyen.eywa.amq.excpetion;
 
 /**
- *
  * @author hnguyen
  */
 public class AMQException extends Exception {
@@ -24,5 +23,5 @@ public class AMQException extends Exception {
     public AMQException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
-    
+
 }

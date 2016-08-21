@@ -3,16 +3,15 @@ package me.hnguyen.eywa.logging.bean;
 import java.util.Date;
 
 /**
- *
  * @author hnguyen
  */
 public interface LoggingBean {
 
-    public Date getDate();
+    Date getDate();
 
-    public String getMethod();
-    
-    public String getMessage();
+    String getMethod();
 
-    public String getLevel();
+    String getMessage();
+
+    String getLevel();
 }

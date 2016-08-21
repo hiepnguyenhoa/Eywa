@@ -1,7 +1,6 @@
 package me.hnguyen.eywa.logging.service;
 
 import javax.inject.Inject;
-import me.hnguyen.eywa.dao.EywaDao;
 import me.hnguyen.eywa.logging.dao.LoggingDao;
 import me.hnguyen.eywa.logging.dto.LoggingDto;
 import me.hnguyen.eywa.logging.entity.LoggingEntity;

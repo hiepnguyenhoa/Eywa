@@ -4,10 +4,9 @@ import me.hnguyen.eywa.BaseEntity;
 import org.springframework.data.neo4j.repository.GraphRepository;
 
 /**
- *
- * @author hnguyen
  * @param <T>
+ * @author hnguyen
  */
 public interface EywaDao<T extends BaseEntity> extends GraphRepository<T> {
-    
+
 }

@@ -41,7 +41,7 @@ public class EywaSenderApp {
     }
     
     private static LoggingDto createLoggingDto(){
-        return new LoggingDtoImpl(1l,new Date(), "createLoggingDto", "Message Title", "INFO");
+        return new LoggingDtoImpl(new Date(), "createLoggingDto", "Message Title", "INFO");
     }
 
 }

@@ -1,6 +1,5 @@
 package me.hnguyen.eywa.config.dto;
 
-import me.hnguyen.eywa.amq.service.MessageProcessor;
 import me.hnguyen.eywa.config.bean.ReceiverBeanImpl;
 import me.hnguyen.eywa.config.entity.ReceiverEntity;
 
@@ -9,9 +8,9 @@ import me.hnguyen.eywa.config.entity.ReceiverEntity;
  * @author hnguyen
  * @param <T> QueueDto
  */
-public class ReceiverDtoImpl<T extends QueueDto, M extends MessageProcessor>
-        extends ReceiverBeanImpl<T, M>
-        implements ReceiverDto<T, M> {
+public class ReceiverDtoImpl<T extends QueueDto>
+        extends ReceiverBeanImpl<T>
+        implements ReceiverDto<T> {
 
     @Override
     public ReceiverEntity toEntity() {

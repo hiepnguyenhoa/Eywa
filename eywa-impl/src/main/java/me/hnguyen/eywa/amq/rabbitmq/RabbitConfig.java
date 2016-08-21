@@ -47,6 +47,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
@@ -58,13 +59,14 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
  */
 @Configuration
 @EnableRabbit
+@Import(value = Neo4JContext.class)
 @ComponentScan(basePackages = {"me.hnguyen.eywa"})
 @ImportResource(value = {"classpath:eywa_config.xml"})
 @PropertySources({
     @PropertySource("classpath:/eywa_config.properties")})
-public class RabbitConfig extends Neo4JContext implements ApplicationContextAware {
+public class RabbitConfig implements ApplicationContextAware {
 
-    protected ApplicationContext ac;
+    protected ApplicationContext APP_CONTEXT;
 
     @Inject
     private InitAQMDataService initAQMDataService;
@@ -162,7 +164,7 @@ public class RabbitConfig extends Neo4JContext implements ApplicationContextAwar
 
     @Override
     public void setApplicationContext(ApplicationContext ac) throws BeansException {
-        this.ac = ac;
+        this.APP_CONTEXT = ac;
     }
 
     static class EywaConnectionFactory {

@@ -50,7 +50,6 @@ public class InitAQMDataService {
         bindingEntities.add(bindingEntity);
         configDao.save(bindingEntities);
         
-        receiverEntity.setQueue(queueEntity);
         configDao.save(receiverEntity);
     }
 }

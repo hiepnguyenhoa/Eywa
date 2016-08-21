@@ -5,10 +5,9 @@ import me.hnguyen.eywa.config.bean.ConfigBean;
 import me.hnguyen.eywa.config.entity.ConfigEntity;
 
 /**
- *
- * @author hnguyen
  * @param <T> ConfigEntity
+ * @author hnguyen
  */
 public interface ConfigDto<T extends ConfigEntity> extends ConfigBean, BaseDto<T> {
-    
+
 }

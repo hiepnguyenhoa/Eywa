@@ -1,30 +1,29 @@
 package me.hnguyen.eywa.config.bean;
 
 /**
- *
  * @author hnguyen
  */
 public interface QueueBean extends ConfigBean {
 
-    public static final String QUEUE_NAME = "name";
-    public static final String DURABLE = "durable";
-    public static final String EXCLUSIVE = "exclusive";
-    public static final String AUTO_DELETE = "autoDelete";
+    String QUEUE_NAME = "name";
+    String DURABLE = "durable";
+    String EXCLUSIVE = "exclusive";
+    String AUTO_DELETE = "autoDelete";
 
-    public String getName();
+    String getName();
 
-    public void setName(String name);
+    void setName(String name);
 
-    public void setDurable(boolean isDurable);
+    void setDurable(boolean isDurable);
 
-    public boolean isDurable();
+    boolean isDurable();
 
-    public void setExclusive(boolean isExclusive);
+    void setExclusive(boolean isExclusive);
 
-    public boolean isExclusive();
+    boolean isExclusive();
 
-    public void setAutoDelete(boolean isAutoDelete);
+    void setAutoDelete(boolean isAutoDelete);
 
-    public boolean isAutoDelete();
+    boolean isAutoDelete();
 
 }

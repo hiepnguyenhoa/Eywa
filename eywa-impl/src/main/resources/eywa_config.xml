@@ -23,7 +23,7 @@
         <property name="key" value="${config.key}"/>
         <property name="name" value="${receiver.name}"/>
         <property name="queue" ref="queue"/>
-        <property name="messageProcessor" ref="saveProcessor"/>
+        <property name="messageProcessor" value="saveProcessor"/>
     </bean>
     
     <bean id="sender" class="me.hnguyen.eywa.config.entity.SenderEntityImpl">

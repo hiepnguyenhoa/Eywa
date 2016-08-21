@@ -4,12 +4,11 @@ import me.hnguyen.eywa.config.bean.BindingBean;
 import me.hnguyen.eywa.config.dto.BindingDto;
 
 /**
- *
- * @author hnguyen
  * @param <E> ExchangeEntity
  * @param <Q> QueueEntity
+ * @author hnguyen
  */
 public interface BindingEntity<E extends ExchangeEntity, Q extends QueueEntity>
-        extends BindingBean<E,Q>, ConfigEntity<BindingDto> {
-    
+        extends BindingBean<E, Q>, ConfigEntity<BindingDto> {
+
 }

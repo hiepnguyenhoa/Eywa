@@ -1,32 +1,31 @@
 package me.hnguyen.eywa.config.bean;
 
 /**
- *
  * @author hnguyen
  */
 public interface ExchangeBean extends ConfigBean {
 
-    public static final String EXCHANGE_NAME = "name";
-    public static final String EXCHANGE_TYPE = "type";
+    String EXCHANGE_NAME = "name";
+    String EXCHANGE_TYPE = "type";
 
-    public void setType(String type);
+    void setType(String type);
 
-    public String getType();
-    
-    public boolean isAutoDelete();
+    String getType();
 
-    public void setAutoDelete(boolean autoDelete);
+    boolean isAutoDelete();
 
-    public boolean isDelay();
+    void setAutoDelete(boolean autoDelete);
 
-    public void setDelay(boolean delay);
+    boolean isDelay();
 
-    public boolean isDurable();
+    void setDelay(boolean delay);
 
-    public void setDurable(boolean durable);
+    boolean isDurable();
 
-    public boolean isInternal();
+    void setDurable(boolean durable);
 
-    public void setInternal(boolean internal);
+    boolean isInternal();
+
+    void setInternal(boolean internal);
 
 }

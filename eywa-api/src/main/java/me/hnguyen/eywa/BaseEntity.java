@@ -1,12 +1,11 @@
 package me.hnguyen.eywa;
 
 /**
- *
- * @author hnguyen
  * @param <T>
+ * @author hnguyen
  */
 public interface BaseEntity<T extends BaseDto> {
-    
-    public T toDto();
-    
+
+    T toDto();
+
 }
