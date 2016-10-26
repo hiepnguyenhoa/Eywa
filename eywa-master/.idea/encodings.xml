@@ -4,7 +4,16 @@
     <file url="file://$PROJECT_DIR$/../eywa-api" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../eywa-impl" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eywa-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eywa-impl" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eywa-receiver" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eywa-sender" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eywa-service-impl" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eywa-services" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eywa-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../eywa-receiver" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../eywa-sender" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../eywa-services" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../eywa-web" charset="UTF-8" />
   </component>
 </project>

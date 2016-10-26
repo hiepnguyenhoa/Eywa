@@ -26,14 +26,21 @@
         <module name="eywa-impl" />
         <module name="eywa-receiver" />
         <module name="eywa-sender" />
+        <module name="eywa-service-impl" />
+        <module name="eywa-services (1)" />
+        <module name="eywa-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="eywa-api" target="1.8" />
       <module name="eywa-impl" target="1.8" />
-      <module name="eywa-master" target="1.5" />
+      <module name="eywa-master" target="1.8" />
       <module name="eywa-receiver" target="1.8" />
       <module name="eywa-sender" target="1.8" />
+      <module name="eywa-service-impl" target="1.8" />
+      <module name="eywa-services" target="1.5" />
+      <module name="eywa-services (1)" target="1.5" />
+      <module name="eywa-web" target="1.6" />
     </bytecodeTargetLevel>
   </component>
 </project>

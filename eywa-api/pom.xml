@@ -40,5 +40,12 @@
             <artifactId>amqp-client</artifactId>
             <version>${amqp.rabbitmq.client}</version>
         </dependency>
+        
+        <!-- JAX-RS -->
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>2.0</version>
+        </dependency>
     </dependencies>
 </project>

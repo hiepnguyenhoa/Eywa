@@ -1,11 +1,12 @@
 package me.hnguyen.eywa.logging.bean;
 
 import java.util.Date;
+import me.hnguyen.eywa.BaseBean;
 
 /**
  * @author hnguyen
  */
-public interface LoggingBean {
+public interface LoggingBean extends BaseBean {
 
     Date getDate();
 

@@ -3,6 +3,7 @@ package me.hnguyen.eywa.logging.bean;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.ws.rs.FormParam;
 import me.hnguyen.eywa.BaseBeanAbst;
 
 /**
@@ -11,9 +12,13 @@ import me.hnguyen.eywa.BaseBeanAbst;
  */
 public class LoggingBeanImpl extends BaseBeanAbst implements LoggingBean, Serializable {
 
+    @FormParam("date")
     private  Date date;
+    @FormParam("method")
     private  String method;
+    @FormParam("message")
     private  String message;
+    @FormParam("level")
     private  String level;
     
     public LoggingBeanImpl(){

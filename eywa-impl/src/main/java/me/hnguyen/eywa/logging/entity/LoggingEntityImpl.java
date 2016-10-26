@@ -10,7 +10,7 @@ import org.neo4j.ogm.annotation.NodeEntity;
  *
  * @author hnguyen
  */
-@NodeEntity(label = "Logging")
+@NodeEntity
 public class LoggingEntityImpl extends LoggingBeanImpl implements LoggingEntity<LoggingDto> {
 
     public LoggingEntityImpl(Date date, String method, String message, String level) {

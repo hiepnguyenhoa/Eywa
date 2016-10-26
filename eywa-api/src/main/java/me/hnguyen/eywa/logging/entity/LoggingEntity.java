@@ -6,6 +6,7 @@ import me.hnguyen.eywa.logging.dto.LoggingDto;
 
 /**
  * @author hnguyen
+ * @param <T>
  */
 public interface LoggingEntity<T extends LoggingDto> extends LoggingBean, BaseEntity<T> {
 

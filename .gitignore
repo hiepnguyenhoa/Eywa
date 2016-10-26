@@ -2,3 +2,6 @@
 /eywa-api/target/
 /eywa-receiver/target/
 /eywa-sender/target/
+/eywa-master/eywa-web/target/
+/eywa-web/nbproject/private/
+/eywa-web/target/
