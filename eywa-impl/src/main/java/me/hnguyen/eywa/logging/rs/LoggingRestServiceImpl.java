@@ -1,14 +1,16 @@
 package me.hnguyen.eywa.logging.rs;
 
-import java.util.List;
-import javax.inject.Inject;
-import javax.ws.rs.core.Response;
-import me.hnguyen.eywa.logging.dto.LoggingDto;
-import me.hnguyen.eywa.logging.service.LoggingService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.ws.rs.core.Response;
+
+import me.hnguyen.eywa.logging.dto.LoggingDto;
+import me.hnguyen.eywa.logging.service.LoggingService;
+
 /**
- *
  * @author hnguyen
  */
 @Service("loggingRestService")

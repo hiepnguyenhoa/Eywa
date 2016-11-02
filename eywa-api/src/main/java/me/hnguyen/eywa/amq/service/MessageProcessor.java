@@ -1,11 +1,11 @@
 package me.hnguyen.eywa.amq.service;
 
-import me.hnguyen.eywa.config.bean.ConfigBean;
 import org.springframework.amqp.core.MessageListener;
 import org.springframework.amqp.support.converter.MessageConverter;
 
+import me.hnguyen.eywa.config.bean.ConfigBean;
+
 /**
- * @param <T>
  * @author hnguyen
  */
 public interface MessageProcessor<T> extends MessageListener, ConfigBean {

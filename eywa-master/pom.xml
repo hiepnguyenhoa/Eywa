@@ -22,12 +22,12 @@
     </properties>
 
     <modules>
-        <module>eywa-api</module>
-        <module>eywa-impl</module>
-        <module>eywa-sender</module>
-        <module>eywa-receiver</module>
-        <module>eywa-web</module>
-        <module>eywa-service-impl</module>
+        <module>../eywa-api</module>
+        <module>../eywa-impl</module>
+        <module>../eywa-sender</module>
+        <module>../eywa-receiver</module>
+        <module>../eywa-web</module>
+        <module>../eywa-service-impl</module>
     </modules>
 
     <dependencyManagement>

@@ -1,25 +1,27 @@
 package me.hnguyen.eywa.receiver;
 
-import java.util.List;
-import javax.inject.Inject;
-import me.hnguyen.eywa.amq.rabbitmq.RabbitConfig;
-import me.hnguyen.eywa.amq.service.MessageProcessor;
-import me.hnguyen.eywa.config.dto.HostDto;
-import me.hnguyen.eywa.config.dto.ReceiverDto;
-import me.hnguyen.eywa.config.service.ConfigurationService;
 import org.springframework.amqp.core.MessageListener;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.annotation.RabbitListenerConfigurer;
-import org.springframework.amqp.rabbit.config.SimpleRabbitListenerEndpoint;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
+import org.springframework.amqp.rabbit.config.SimpleRabbitListenerEndpoint;
 import org.springframework.amqp.rabbit.listener.RabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistrar;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.List;
+
+import javax.inject.Inject;
+
+import me.hnguyen.eywa.amq.rabbitmq.RabbitConfig;
+import me.hnguyen.eywa.amq.service.MessageProcessor;
+import me.hnguyen.eywa.config.dto.HostDto;
+import me.hnguyen.eywa.config.dto.ReceiverDto;
+import me.hnguyen.eywa.config.service.ConfigurationService;
+
 /**
- *
  * @author hnguyen
  */
 @Configuration
@@ -31,7 +33,7 @@ public class EywaReceiverConfigImpl extends RabbitConfig implements RabbitListen
 
     @Bean(name = "rabbitListenerContainerFactory")
     public RabbitListenerContainerFactory listenerAdapters() {
-        SimpleRabbitListenerContainerFactory container =  new SimpleRabbitListenerContainerFactory();
+        SimpleRabbitListenerContainerFactory container = new SimpleRabbitListenerContainerFactory();
         container.setConnectionFactory(this.getConnectionFactory("localhost"));
         return container;
     }

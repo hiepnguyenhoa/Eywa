@@ -8,6 +8,6 @@ import me.hnguyen.eywa.config.entity.ReceiverEntity;
  * @author hnguyen
  */
 public interface ReceiverDto<B extends QueueDto>
-        extends ReceiverBean<B>, ConfigDto<ReceiverEntity> {
+    extends ReceiverBean<B>, ConfigDto<ReceiverEntity> {
 
 }

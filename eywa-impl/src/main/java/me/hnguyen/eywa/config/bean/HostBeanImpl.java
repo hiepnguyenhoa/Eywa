@@ -1,7 +1,6 @@
 package me.hnguyen.eywa.config.bean;
 
 /**
- *
  * @author hnguyen
  */
 public class HostBeanImpl extends ConfigBeanAbst implements HostBean {
@@ -19,7 +18,7 @@ public class HostBeanImpl extends ConfigBeanAbst implements HostBean {
     public void setPort(int port) {
         this.port = port;
     }
-    
+
     @Override
     public String getUsername() {
         return username;
@@ -39,7 +38,7 @@ public class HostBeanImpl extends ConfigBeanAbst implements HostBean {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     @Override
     public String getKeyMap() {
         return this.getKey();

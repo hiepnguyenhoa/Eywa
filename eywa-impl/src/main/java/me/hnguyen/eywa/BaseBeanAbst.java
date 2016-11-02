@@ -3,16 +3,15 @@ package me.hnguyen.eywa;
 import org.neo4j.ogm.annotation.GraphId;
 
 /**
- *
  * @author hnguyen
  */
-public abstract class BaseBeanAbst implements BaseBean{
-    
+public abstract class BaseBeanAbst implements BaseBean {
+
     @GraphId
     protected Long id;
-    
-    public BaseBeanAbst(){
-        
+
+    public BaseBeanAbst() {
+
     }
 
     @Override
@@ -24,11 +23,11 @@ public abstract class BaseBeanAbst implements BaseBean{
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     @Override
     public abstract boolean equals(Object obj);
 
     @Override
     public abstract int hashCode();
-    
+
 }

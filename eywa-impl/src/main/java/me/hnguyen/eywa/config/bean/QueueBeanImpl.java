@@ -1,7 +1,6 @@
 package me.hnguyen.eywa.config.bean;
 
 /**
- *
  * @author hnguyen
  */
 public class QueueBeanImpl extends ConfigBeanAbst implements QueueBean {

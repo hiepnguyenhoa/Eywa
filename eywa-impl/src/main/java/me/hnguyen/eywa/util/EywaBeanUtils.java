@@ -1,14 +1,14 @@
 package me.hnguyen.eywa.util;
 
-import java.util.ArrayList;
-import java.util.List;
-import me.hnguyen.eywa.BaseDto;
-import me.hnguyen.eywa.BaseEntity;
-import me.hnguyen.eywa.config.bean.ConfigBean;
 import org.springframework.beans.BeanUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import me.hnguyen.eywa.BaseDto;
+import me.hnguyen.eywa.BaseEntity;
+
 /**
- *
  * @author hnguyen
  */
 public class EywaBeanUtils {
@@ -23,9 +23,9 @@ public class EywaBeanUtils {
         });
         return dtos;
     }
-    
-    public static Object copyProperties(Object source, Object target){
-        if(source==null){
+
+    public static Object copyProperties(Object source, Object target) {
+        if (source == null) {
             return null;
         }
         BeanUtils.copyProperties(source, target);

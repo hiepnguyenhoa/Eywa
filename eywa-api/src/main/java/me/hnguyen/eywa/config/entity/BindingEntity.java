@@ -9,6 +9,6 @@ import me.hnguyen.eywa.config.dto.BindingDto;
  * @author hnguyen
  */
 public interface BindingEntity<E extends ExchangeEntity, Q extends QueueEntity>
-        extends BindingBean<E, Q>, ConfigEntity<BindingDto> {
+    extends BindingBean<E, Q>, ConfigEntity<BindingDto> {
 
 }

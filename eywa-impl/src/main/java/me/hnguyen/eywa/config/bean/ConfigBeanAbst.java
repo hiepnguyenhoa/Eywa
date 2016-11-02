@@ -1,11 +1,11 @@
 package me.hnguyen.eywa.config.bean;
 
 import java.util.Objects;
+
 import me.hnguyen.eywa.BaseBeanAbst;
 import me.hnguyen.eywa.util.LambdaUtils;
 
 /**
- *
  * @author hnguyen
  */
 public abstract class ConfigBeanAbst extends BaseBeanAbst implements ConfigBean {
@@ -44,7 +44,7 @@ public abstract class ConfigBeanAbst extends BaseBeanAbst implements ConfigBean 
 
         ConfigBeanAbst tmp = (ConfigBeanAbst) obj;
         return LambdaUtils.compare_object.apply(this.key, tmp.getKey())
-                || LambdaUtils.compare_object.apply(this.name, tmp.getName());
+               || LambdaUtils.compare_object.apply(this.name, tmp.getName());
     }
 
     @Override

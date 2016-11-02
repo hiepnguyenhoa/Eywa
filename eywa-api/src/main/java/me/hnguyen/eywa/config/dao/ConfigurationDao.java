@@ -1,14 +1,20 @@
 package me.hnguyen.eywa.config.dao;
 
-import me.hnguyen.eywa.config.entity.*;
-import me.hnguyen.eywa.dao.EywaDao;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+import me.hnguyen.eywa.config.entity.BindingEntity;
+import me.hnguyen.eywa.config.entity.ConfigEntity;
+import me.hnguyen.eywa.config.entity.ExchangeEntity;
+import me.hnguyen.eywa.config.entity.HostEntity;
+import me.hnguyen.eywa.config.entity.QueueEntity;
+import me.hnguyen.eywa.config.entity.ReceiverEntity;
+import me.hnguyen.eywa.config.entity.SenderEntity;
+import me.hnguyen.eywa.dao.EywaDao;
+
 /**
- * @param <T>
  * @author hnguyen
  */
 @Component

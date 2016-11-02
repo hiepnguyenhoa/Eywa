@@ -4,7 +4,6 @@ import me.hnguyen.eywa.config.bean.QueueBeanImpl;
 import me.hnguyen.eywa.config.entity.QueueEntity;
 
 /**
- *
  * @author hnguyen
  */
 public class QueueDtoImpl extends QueueBeanImpl implements QueueDto {

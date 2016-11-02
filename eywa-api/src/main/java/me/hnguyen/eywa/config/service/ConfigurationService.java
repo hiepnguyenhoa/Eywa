@@ -1,8 +1,13 @@
 package me.hnguyen.eywa.config.service;
 
-import me.hnguyen.eywa.config.dto.*;
-
 import java.util.List;
+
+import me.hnguyen.eywa.config.dto.BindingDto;
+import me.hnguyen.eywa.config.dto.ExchangeDto;
+import me.hnguyen.eywa.config.dto.HostDto;
+import me.hnguyen.eywa.config.dto.QueueDto;
+import me.hnguyen.eywa.config.dto.ReceiverDto;
+import me.hnguyen.eywa.config.dto.SenderDto;
 
 /**
  * @author hnguyen

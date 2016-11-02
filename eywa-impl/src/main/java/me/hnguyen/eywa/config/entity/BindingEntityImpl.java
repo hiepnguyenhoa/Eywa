@@ -1,20 +1,18 @@
 package me.hnguyen.eywa.config.entity;
 
+import org.neo4j.ogm.annotation.NodeEntity;
+
 import me.hnguyen.eywa.config.bean.BindingBeanImpl;
 import me.hnguyen.eywa.config.dto.BindingDto;
 import me.hnguyen.eywa.config.dto.BindingDtoImpl;
-import org.neo4j.ogm.annotation.NodeEntity;
 
 /**
- *
  * @author hnguyen
- * @param <E>
- * @param <Q>
  */
 @NodeEntity(label = "Binding")
 public class BindingEntityImpl<E extends ExchangeEntity, Q extends QueueEntity>
-        extends BindingBeanImpl<E, Q>
-        implements BindingEntity<E, Q> {
+    extends BindingBeanImpl<E, Q>
+    implements BindingEntity<E, Q> {
 
     @Override
     public BindingDto toDto() {

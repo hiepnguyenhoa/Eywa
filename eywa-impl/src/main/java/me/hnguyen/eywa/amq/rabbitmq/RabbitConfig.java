@@ -1,37 +1,11 @@
 package me.hnguyen.eywa.amq.rabbitmq;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.inject.Inject;
-import me.hnguyen.eywa.Neo4JContext;
-import me.hnguyen.eywa.amq.exception.CreateBindingException;
-import me.hnguyen.eywa.amq.exception.CreateExchangeException;
-import me.hnguyen.eywa.config.bean.BindingBean;
-import me.hnguyen.eywa.config.bean.ExchangeBean;
-import me.hnguyen.eywa.config.bean.HostBean;
-import me.hnguyen.eywa.config.bean.QueueBean;
-import me.hnguyen.eywa.config.dto.BindingDto;
-import me.hnguyen.eywa.config.dto.ExchangeDto;
-import me.hnguyen.eywa.config.dto.HostDto;
-import me.hnguyen.eywa.config.dto.QueueDto;
-import me.hnguyen.eywa.config.service.ConfigurationService;
-import me.hnguyen.eywa.config.service.InitAQMDataService;
 import org.apache.commons.lang3.Validate;
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Exchange;
-import static org.springframework.amqp.core.ExchangeTypes.DELAYED;
-import static org.springframework.amqp.core.ExchangeTypes.DIRECT;
-import static org.springframework.amqp.core.ExchangeTypes.FANOUT;
-import static org.springframework.amqp.core.ExchangeTypes.HEADERS;
-import static org.springframework.amqp.core.ExchangeTypes.SYSTEM;
-import static org.springframework.amqp.core.ExchangeTypes.TOPIC;
 import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
@@ -53,8 +27,37 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.inject.Inject;
+
+import me.hnguyen.eywa.Neo4JContext;
+import me.hnguyen.eywa.amq.exception.CreateBindingException;
+import me.hnguyen.eywa.amq.exception.CreateExchangeException;
+import me.hnguyen.eywa.config.bean.BindingBean;
+import me.hnguyen.eywa.config.bean.ExchangeBean;
+import me.hnguyen.eywa.config.bean.HostBean;
+import me.hnguyen.eywa.config.bean.QueueBean;
+import me.hnguyen.eywa.config.dto.BindingDto;
+import me.hnguyen.eywa.config.dto.ExchangeDto;
+import me.hnguyen.eywa.config.dto.HostDto;
+import me.hnguyen.eywa.config.dto.QueueDto;
+import me.hnguyen.eywa.config.service.ConfigurationService;
+import me.hnguyen.eywa.config.service.InitAQMDataService;
+
+import static org.springframework.amqp.core.ExchangeTypes.DELAYED;
+import static org.springframework.amqp.core.ExchangeTypes.DIRECT;
+import static org.springframework.amqp.core.ExchangeTypes.FANOUT;
+import static org.springframework.amqp.core.ExchangeTypes.HEADERS;
+import static org.springframework.amqp.core.ExchangeTypes.SYSTEM;
+import static org.springframework.amqp.core.ExchangeTypes.TOPIC;
+
 /**
- *
  * @author hnguyen
  */
 @Configuration
@@ -158,7 +161,7 @@ public class RabbitConfig implements ApplicationContextAware {
         List<HostDto> hostDtos = configService.getHostConfig();
         hostDtos.stream().forEach((hostDto) -> {
             amqConnectionFactories.put(hostDto.getKeyMap(),
-                    EywaConnectionFactory.createConnectionFactory(hostDto));
+                                       EywaConnectionFactory.createConnectionFactory(hostDto));
         });
     }
 
@@ -185,9 +188,9 @@ public class RabbitConfig implements ApplicationContextAware {
         public static Binding createBinding(BindingBean bindingDto) {
             Validate.notNull(bindingDto);
             return createBinding(
-                    EywaQueueFactory.createQueue(bindingDto.getQueue()),
-                    EywaExchangeFactory.createExchange(bindingDto.getExchange()),
-                    bindingDto.getRouting()
+                EywaQueueFactory.createQueue(bindingDto.getQueue()),
+                EywaExchangeFactory.createExchange(bindingDto.getExchange()),
+                bindingDto.getRouting()
             );
         }
 

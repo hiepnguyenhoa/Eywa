@@ -1,6 +1,7 @@
 package me.hnguyen.eywa.logging.bean;
 
 import java.util.Date;
+
 import me.hnguyen.eywa.BaseBean;
 
 /**

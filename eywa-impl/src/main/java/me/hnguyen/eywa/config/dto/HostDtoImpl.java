@@ -4,7 +4,6 @@ import me.hnguyen.eywa.config.bean.HostBeanImpl;
 import me.hnguyen.eywa.config.entity.HostEntity;
 
 /**
- *
  * @author hnguyen
  */
 public class HostDtoImpl extends HostBeanImpl implements HostDto {
@@ -13,5 +12,5 @@ public class HostDtoImpl extends HostBeanImpl implements HostDto {
     public HostEntity toEntity() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

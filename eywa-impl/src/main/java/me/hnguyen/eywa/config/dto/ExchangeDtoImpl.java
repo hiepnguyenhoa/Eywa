@@ -4,7 +4,6 @@ import me.hnguyen.eywa.config.bean.ExchangeBeanImpl;
 import me.hnguyen.eywa.config.entity.ExchangeEntity;
 
 /**
- *
  * @author hnguyen
  */
 public class ExchangeDtoImpl extends ExchangeBeanImpl implements ExchangeDto {

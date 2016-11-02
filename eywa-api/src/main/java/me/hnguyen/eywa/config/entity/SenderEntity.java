@@ -8,6 +8,6 @@ import me.hnguyen.eywa.config.dto.SenderDto;
  * @author hnguyen
  */
 public interface SenderEntity<E extends ExchangeEntity>
-        extends SenderBean<E>, ConfigEntity<SenderDto> {
+    extends SenderBean<E>, ConfigEntity<SenderDto> {
 
 }

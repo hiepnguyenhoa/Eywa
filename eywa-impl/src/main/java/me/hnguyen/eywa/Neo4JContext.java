@@ -33,5 +33,5 @@ public class Neo4JContext extends Neo4jConfiguration {
     public Session getSession() throws Exception {
         return super.getSession();
     }
-    
+
 }

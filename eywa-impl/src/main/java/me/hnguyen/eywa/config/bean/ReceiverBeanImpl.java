@@ -1,14 +1,11 @@
 package me.hnguyen.eywa.config.bean;
 
-import me.hnguyen.eywa.amq.service.MessageProcessor;
-
 /**
- *
- * @author hnguyen
  * @param <T> QueueBean
+ * @author hnguyen
  */
 public class ReceiverBeanImpl<T extends QueueBean>
-        extends ConfigBeanAbst implements ReceiverBean<T> {
+    extends ConfigBeanAbst implements ReceiverBean<T> {
 
     private T queue;
     private String messageProcessor;

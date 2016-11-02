@@ -9,10 +9,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
+
 import me.hnguyen.eywa.logging.dto.LoggingDto;
 
 /**
- *
  * @author hnguyen
  */
 @Path("/logging/logs")
@@ -21,14 +21,14 @@ import me.hnguyen.eywa.logging.dto.LoggingDto;
 public interface LoggingRestService {
 
     @GET
-    public Response getAllLogs(@QueryParam("page") @DefaultValue("0") int pageNumber, 
-            @QueryParam("size") @DefaultValue("50") int pageSize);
+    public Response getAllLogs(@QueryParam("page") @DefaultValue("0") int pageNumber,
+                               @QueryParam("size") @DefaultValue("50") int pageSize);
 
     @GET
-    public Response getAllLogs(@BeanParam LoggingDto template, 
-            @QueryParam("page") @DefaultValue("0") int pageNumber, 
-            @QueryParam("size") @DefaultValue("50") int pageSize);
-    
+    public Response getAllLogs(@BeanParam LoggingDto template,
+                               @QueryParam("page") @DefaultValue("0") int pageNumber,
+                               @QueryParam("size") @DefaultValue("50") int pageSize);
+
     @POST
     public Response addLogs(@BeanParam LoggingDto logDto);
 }

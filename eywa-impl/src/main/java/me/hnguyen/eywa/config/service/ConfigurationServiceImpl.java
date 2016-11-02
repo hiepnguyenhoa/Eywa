@@ -1,22 +1,24 @@
 package me.hnguyen.eywa.config.service;
 
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.inject.Inject;
+
 import me.hnguyen.eywa.config.dao.ConfigurationDao;
 import me.hnguyen.eywa.config.dto.BindingDto;
 import me.hnguyen.eywa.config.dto.ExchangeDto;
 import me.hnguyen.eywa.config.dto.HostDto;
 import me.hnguyen.eywa.config.dto.QueueDto;
 import me.hnguyen.eywa.config.dto.ReceiverDto;
-import me.hnguyen.eywa.util.EywaBeanUtils;
-import org.springframework.stereotype.Component;
 import me.hnguyen.eywa.config.dto.SenderDto;
 import me.hnguyen.eywa.config.entity.ReceiverEntity;
-import org.springframework.transaction.annotation.Transactional;
+import me.hnguyen.eywa.util.EywaBeanUtils;
 
 /**
- *
  * @author hnguyen
  */
 @Component
@@ -47,7 +49,7 @@ public class ConfigurationServiceImpl implements ConfigurationService {
     }
 
     @Override
-    public <T extends ExchangeDto>List<T> getExchanges(String key) {
+    public <T extends ExchangeDto> List<T> getExchanges(String key) {
         return EywaBeanUtils.toDto(configDAO.findExchanges(key));
     }
 
@@ -55,7 +57,7 @@ public class ConfigurationServiceImpl implements ConfigurationService {
     public <T extends ReceiverDto> List<T> getReceivers(String key) {
         List<ReceiverEntity> receiverEntities = configDAO.findReceivers(key);
         List<T> receiverDtos = new ArrayList<>();
-        for(ReceiverEntity receiverEntity:receiverEntities){
+        for (ReceiverEntity receiverEntity : receiverEntities) {
             T receiverDto = (T) receiverEntity.toDto();
             receiverDtos.add(receiverDto);
         }

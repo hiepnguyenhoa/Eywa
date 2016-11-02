@@ -1,7 +1,6 @@
 package me.hnguyen.eywa.amq.exception;
 
 /**
- *
  * @author hnguyen
  */
 public class CreateBindingException extends RuntimeException {

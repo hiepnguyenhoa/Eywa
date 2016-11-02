@@ -1,7 +1,6 @@
 package me.hnguyen.eywa.config.bean;
 
 /**
- *
  * @author hnguyen
  */
 public class ExchangeBeanImpl extends ConfigBeanAbst implements ExchangeBean {
@@ -61,7 +60,7 @@ public class ExchangeBeanImpl extends ConfigBeanAbst implements ExchangeBean {
     public void setInternal(boolean internal) {
         this.internal = internal;
     }
-    
+
     @Override
     public String getKeyMap() {
         StringBuilder keyMap = new StringBuilder();

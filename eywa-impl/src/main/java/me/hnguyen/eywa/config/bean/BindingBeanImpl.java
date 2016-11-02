@@ -1,17 +1,15 @@
 package me.hnguyen.eywa.config.bean;
 
 import java.util.Objects;
+
 import me.hnguyen.eywa.util.LambdaUtils;
 
 /**
- *
  * @author hnguyen
- * @param <E>
- * @param <Q>
  */
-public class BindingBeanImpl< E extends ExchangeBean, Q extends QueueBean>
-        extends ConfigBeanAbst
-        implements BindingBean<E, Q> {
+public class BindingBeanImpl<E extends ExchangeBean, Q extends QueueBean>
+    extends ConfigBeanAbst
+    implements BindingBean<E, Q> {
 
     private E exchange;
     private Q queue;
@@ -57,8 +55,8 @@ public class BindingBeanImpl< E extends ExchangeBean, Q extends QueueBean>
         }
         BindingBeanImpl binding = (BindingBeanImpl) obj;
         return LambdaUtils.compare_object.apply(this.exchange, binding.exchange)
-                || LambdaUtils.compare_object.apply(this.queue, binding.queue)
-                || LambdaUtils.compare_object.apply(this.routing, binding.routing);
+               || LambdaUtils.compare_object.apply(this.queue, binding.queue)
+               || LambdaUtils.compare_object.apply(this.routing, binding.routing);
     }
 
     @Override
@@ -69,7 +67,7 @@ public class BindingBeanImpl< E extends ExchangeBean, Q extends QueueBean>
         hash = 37 * hash + Objects.hashCode(this.routing);
         return hash;
     }
-    
+
     @Override
     public String getKeyMap() {
         StringBuilder keyMap = new StringBuilder();

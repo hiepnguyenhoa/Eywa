@@ -1,12 +1,11 @@
 package me.hnguyen.eywa.config.bean;
 
 import java.util.Objects;
+
 import me.hnguyen.eywa.util.LambdaUtils;
 
 /**
- *
  * @author hnguyen
- * @param <E>
  */
 public class SenderBeanImpl<E extends ExchangeBean> extends ConfigBeanAbst implements SenderBean<E> {
 

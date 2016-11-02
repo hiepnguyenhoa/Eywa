@@ -1,12 +1,12 @@
 package me.hnguyen.eywa.sender;
 
-import me.hnguyen.eywa.amq.service.EywaSender;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.MessageConverter;
 
+import me.hnguyen.eywa.amq.service.EywaSender;
+
 /**
- *
  * @author hnguyen
  */
 public class EywaSenderImpl implements EywaSender {
